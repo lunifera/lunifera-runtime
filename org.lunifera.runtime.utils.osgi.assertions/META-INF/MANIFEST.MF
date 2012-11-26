@@ -1,0 +1,22 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.lunifera.runtime.utils.osgi.assertions
+Bundle-Version: 0.0.1.qualifier
+Bundle-Vendor: %providerName
+Bundle-Localization: OSGI-INF/l10n/bundle
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: org.lunifera.runtime.utils.osgi.assertions,
+ org.lunifera.runtime.utils.osgi.assertions.services,
+ org.lunifera.runtime.utils.osgi.assertions.bundles,
+ org.lunifera.runtime.utils.osgi.assertions.filters
+Import-Package: org.lunifera.runtime.utils.osgi.assertions,
+ org.lunifera.runtime.utils.osgi.assertions.bundles,
+ org.lunifera.runtime.utils.osgi.assertions.filters,
+ org.lunifera.runtime.utils.osgi.assertions.services,
+ org.osgi.framework;version="1.7.0",
+ org.osgi.service.packageadmin;version="1.2.0",
+ org.osgi.util.tracker;version="1.5.1"
+Require-Bundle: org.junit;bundle-version="4.10.0"
+
