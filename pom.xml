@@ -12,19 +12,17 @@
 	<packaging>pom</packaging>
 	<name>Lunifera :: Runtime features : Parent POM</name>
 
+	<organization>
+		<name>Lunifera.org</name>
+		<url>www.lunifera.org</url>
+	</organization>
+
 	<properties>
 		<next-release>0.0.2-SNAPSHOT</next-release>
-		<tycho-version>0.16.0-SNAPSHOT</tycho-version>
-
-		<eclipse-p2>http://download.eclipse.org/releases/juno</eclipse-p2>
+		<tycho-version>0.16.0</tycho-version>
+		<tychoExtrasVersion>0.16.0</tychoExtrasVersion>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<orbit-p2>http://download.eclipse.org/tools/orbit/downloads/drops/R20120526062928/repository/</orbit-p2>
-		<xtext-p2>http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/</xtext-p2>
-		<bpmn2-p2>https://hudson.eclipse.org/hudson/job/bpmn2-nightly/ws/org.eclipse.bpmn2.site/target/site/</bpmn2-p2>
-		<gemini-jpa-p2>https://hudson.eclipse.org/hudson/job/gemini-jpa/lastSuccessfulBuild/artifact/org.eclipse.gemini.jpa.updatesite/target/repository/</gemini-jpa-p2>
-		<m2e-buildhelper-p2>http://repository.tesla.io:8081/nexus/content/sites/m2e.extras/m2eclipse-buildhelper/0.15.0/N/0.15.0.201207090124/</m2e-buildhelper-p2>
-		<m2e-tycho-p2>http://repository.tesla.io:8081/nexus/content/sites/m2e.extras/m2eclipse-tycho/0.6.0/N/0.6.0.201207302152/</m2e-tycho-p2>
 	</properties>
 
 	<developers>
@@ -54,114 +52,57 @@
 		</developer>
 	</developers>
 
-	<repositories>
-		<repository>
-			<id>BPMN2</id>
-			<url>${bpmn2-p2}</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<layout>p2</layout>
-		</repository>
-		<repository>
-			<id>gemini-jpa</id>
-			<url>${gemini-jpa-p2}</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<layout>p2</layout>
-		</repository>
-		<repository>
-			<id>m2e-buildhelper</id>
-			<url>${m2e-buildhelper-p2}</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<layout>p2</layout>
-		</repository>
-		<repository>
-			<id>m2e-tycho</id>
-			<url>${m2e-tycho-p2}</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<layout>p2</layout>
-		</repository>
-		<repository>
-			<id>Orbit</id>
-			<url>${orbit-p2}</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<layout>p2</layout>
-		</repository>
-		<repository>
-			<id>Xtext</id>
-			<url>${xtext-p2}</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<layout>p2</layout>
-		</repository>
-		<repository>
-			<id>Eclipse</id>
-			<url>${eclipse-p2}</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<layout>p2</layout>
-		</repository>
-	</repositories>
+	<profiles>
+		<profile>
+			<id>prepare-for-next-release</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<defaultGoal>org.eclipse.tycho:tycho-versions-plugin:set-version</defaultGoal>
+				<plugins>
+					<plugin>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>tycho-versions-plugin</artifactId>
+						<version>${tycho-version}</version>
+						<executions>
+							<execution>
+								<id>change-next-release</id>
+								<goals>
+									<goal>set-version</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<newVersion>${next-release}</newVersion>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 
-	<pluginRepositories>
-		<pluginRepository>
-			<id>fornax</id>
-			<url>http://www.fornax-platform.org/m2/repository</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
-		<!-- <pluginRepository> -->
-		<!-- <id>fornax-snapshots</id> -->
-		<!-- <url>http://www.fornax-platform.org/archiva/repository/snapshots/</url> -->
-		<!-- <snapshots> -->
-		<!-- <enabled>true</enabled> -->
-		<!-- </snapshots> -->
-		<!-- </pluginRepository> -->
-		<pluginRepository>
-			<id>tycho-snapshots</id>
-			<url>https://oss.sonatype.org/content/groups/public/</url>
-		</pluginRepository>
-		<pluginRepository>
-			<id>xtend</id>
-			<url>http://build.eclipse.org/common/xtend/maven</url>
-		</pluginRepository>
-	</pluginRepositories>
-
+		<profile>
+			<id>p2-juno</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<defaultGoal>clean verify</defaultGoal>
+			</build>
+			<modules>
+				<module>org.lunifera.runtime.p2.juno</module>
+				<module>org.lunifera.runtime.platform.juno</module>
+				
+				<module>org.lunifera.runtime.feature.configuration.manager</module>
+				<module>org.lunifera.runtime.feature.utils.assertions</module>
+				<module>org.lunifera.runtime.utils.osgi.assertions</module>
+				<module>org.lunifera.runtime.component.configuration.manager</module>
+				<module>org.lunifera.runtime.component.configuration.manager.test.conf</module>
+				<module>org.lunifera.runtime.component.configuration.manager.tests</module>
+			</modules>
+		</profile>
+	</profiles>
+		
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 
@@ -212,8 +153,16 @@
 					<artifactId>target-platform-configuration</artifactId>
 					<version>${tycho-version}</version>
 					<configuration>
-						<resolver>p2</resolver>
-						<pomDependencies>consider</pomDependencies>
+						<!-- <resolver>p2</resolver> -->
+						<!-- <pomDependencies>consider</pomDependencies> -->
+						<ignoreTychoRepositories>true</ignoreTychoRepositories>
+						<target>
+							<artifact>
+								<groupId>org.lunifera.runtime</groupId>
+								<artifactId>org.lunifera.runtime.platform.juno</artifactId>
+								<version>${project.version}</version>
+							</artifact>
+						</target>
 					</configuration>
 				</plugin>
 				<plugin>
@@ -244,19 +193,6 @@
 					</configuration>
 				</plugin>
 				<plugin>
-					<groupId>org.fornax.toolsupport</groupId>
-					<artifactId>fornax-oaw-m2-plugin</artifactId>
-					<version>3.4.0</version>
-					<configuration>
-						<workflowEngine>mwe2</workflowEngine>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.eclipse.xtend</groupId>
-					<artifactId>xtend-maven-plugin</artifactId>
-					<version>2.3.1</version>
-				</plugin>
-				<plugin>
 					<artifactId>maven-clean-plugin</artifactId>
 					<version>2.5</version>
 				</plugin>
@@ -268,12 +204,5 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-	<organization>
-		<name>Lunifera.org</name>
-		<url>www.lunifera.org</url>
-	</organization>
-    <modules>
-		<module>org.lunifera.runtime.p2.repo.juno</module>
-		<module>org.lunifera.runtime.p2.target.juno</module>
-	</modules>
+
 </project>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.lunifera.runtime.feature.configuration.manager_0.0.1.qualifier.jar" id="org.lunifera.runtime.feature.configuration.manager" version="0.0.1.qualifier">
+      <category name="lunifera-runtime-components"/>
+   </feature>
+   <category-def name="lunifera-runtime-components" label="Lunifera Runtime Components"/>
+   <category-def name="lunifera-runtime-utilities" label="Lunifera Runtime Utilities"/>
+</site>
