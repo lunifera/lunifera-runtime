@@ -3,6 +3,9 @@
    <feature url="features/org.lunifera.runtime.feature.configuration.manager_0.0.1.qualifier.jar" id="org.lunifera.runtime.feature.configuration.manager" version="0.0.1.qualifier">
       <category name="lunifera-runtime-components"/>
    </feature>
+   <feature url="features/org.lunifera.runtime.feature.utils.assertions_0.0.1.qualifier.jar" id="org.lunifera.runtime.feature.utils.assertions" version="0.0.1.qualifier">
+      <category name="lunifera-runtime-utilities"/>
+   </feature>
    <category-def name="lunifera-runtime-components" label="Lunifera Runtime Components"/>
    <category-def name="lunifera-runtime-utilities" label="Lunifera Runtime Utilities"/>
 </site>
