@@ -2,55 +2,21 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<prerequisites>
-		<maven>3.0</maven>
-	</prerequisites>
+	<parent>
+		<groupId>org.lunifera</groupId>
+		<artifactId>org.lunifera</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
 
 	<groupId>org.lunifera.runtime</groupId>
 	<artifactId>org.lunifera.runtime</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>pom</packaging>
-	<name>Lunifera :: Runtime features : Parent POM</name>
 
-	<organization>
-		<name>Lunifera.org</name>
-		<url>www.lunifera.org</url>
-	</organization>
+	<packaging>pom</packaging>
+	<name>Lunifera :: Runtime Components : Parent POM</name>
 
 	<properties>
 		<next-release>0.0.2-SNAPSHOT</next-release>
-		<tycho-version>0.16.0</tycho-version>
-		<tychoExtrasVersion>0.16.0</tychoExtrasVersion>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
-
-	<developers>
-		<developer>
-			<id>cvgaviao</id>
-			<name>Cristiano Gavião</name>
-			<email>cvgaviao@gmail.com</email>
-			<timezone>-3</timezone>
-		</developer>
-		<developer>
-			<id>florianpirchner</id>
-			<name>Florian Pirchner</name>
-			<email>florian.pirchner@gmail.com</email>
-			<timezone>+2</timezone>
-		</developer>
-		<developer>
-			<id>haglo</id>
-			<name>Hans-George Glöckler</name>
-			<email>hans-georg.gloeckler@uni-ulm.de</email>
-			<timezone>+2</timezone>
-		</developer>
-        <developer>
-			<id>rhandsch</id>
-			<name>Robert Handschmann</name>
-			<email>robert.handschmann@gmail.com</email>
-			<timezone>+2</timezone>
-		</developer>
-	</developers>
 
 	<profiles>
 		<profile>
@@ -84,15 +50,12 @@
 		<profile>
 			<id>p2-juno</id>
 			<activation>
-				<activeByDefault>true</activeByDefault>
+				<activeByDefault>false</activeByDefault>
 			</activation>
-			<build>
-				<defaultGoal>clean verify</defaultGoal>
-			</build>
 			<modules>
-				<module>org.lunifera.runtime.p2.juno</module>
-				<module>org.lunifera.runtime.platform.juno</module>
-				
+				<module>org.lunifera.runtime.p2</module>
+				<module>org.lunifera.runtime.target.juno</module>
+
 				<module>org.lunifera.runtime.feature.configuration.manager</module>
 				<module>org.lunifera.runtime.feature.utils.assertions</module>
 				<module>org.lunifera.runtime.utils.osgi.assertions</module>
@@ -100,18 +63,72 @@
 				<module>org.lunifera.runtime.component.configuration.manager.test.conf</module>
 				<module>org.lunifera.runtime.component.configuration.manager.tests</module>
 			</modules>
+			<build>
+				<defaultGoal>clean verify</defaultGoal>
+				<pluginManagement>
+					<plugins>
+						<plugin>
+							<groupId>org.eclipse.tycho</groupId>
+							<artifactId>target-platform-configuration</artifactId>
+							<version>${tycho-version}</version>
+							<configuration>
+								<ignoreTychoRepositories>true</ignoreTychoRepositories>
+								<target>
+									<artifact>
+										<groupId>org.lunifera.runtime</groupId>
+										<artifactId>org.lunifera.runtime.target.juno</artifactId>
+										<version>${project.version}</version>
+									</artifact>
+								</target>
+							</configuration>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+			</build>
+		</profile>
+		<profile>
+			<id>p2-kepler</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<modules>
+				<module>org.lunifera.runtime.p2</module>
+				<module>org.lunifera.runtime.target.kepler</module>
+
+				<module>org.lunifera.runtime.feature.configuration.manager</module>
+				<module>org.lunifera.runtime.feature.utils.assertions</module>
+				<module>org.lunifera.runtime.utils.osgi.assertions</module>
+				<module>org.lunifera.runtime.component.configuration.manager</module>
+				<module>org.lunifera.runtime.component.configuration.manager.test.conf</module>
+				<module>org.lunifera.runtime.component.configuration.manager.tests</module>
+			</modules>
+			<build>
+				<defaultGoal>clean verify</defaultGoal>
+				<pluginManagement>
+					<plugins>
+						<plugin>
+							<groupId>org.eclipse.tycho</groupId>
+							<artifactId>target-platform-configuration</artifactId>
+							<version>${tycho-version}</version>
+							<configuration>
+								<ignoreTychoRepositories>true</ignoreTychoRepositories>
+								<target>
+									<artifact>
+										<groupId>org.lunifera.runtime</groupId>
+										<artifactId>org.lunifera.runtime.target.kepler</artifactId>
+										<version>${project.version}</version>
+									</artifact>
+								</target>
+							</configuration>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+			</build>
 		</profile>
 	</profiles>
-		
+
 	<build>
-		<sourceDirectory>src</sourceDirectory>
-
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-			</plugin>
-
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-maven-plugin</artifactId>
@@ -128,81 +145,7 @@
 			</plugin>
 		</plugins>
 
-		<pluginManagement>
-			<plugins>
-				<!-- enable tycho build -->
-				<plugin>
-					<groupId>org.eclipse.tycho</groupId>
-					<artifactId>tycho-maven-plugin</artifactId>
-					<version>${tycho-version}</version>
-					<extensions>true</extensions>
-				</plugin>
-				<plugin>
-					<groupId>org.eclipse.tycho</groupId>
-					<artifactId>tycho-compiler-plugin</artifactId>
-					<version>${tycho-version}</version>
-					<configuration>
-						<compilerVersion>1.6</compilerVersion>
-						<encoding>UTF-8</encoding>
-						<source>1.6</source>
-						<target>1.6</target>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.eclipse.tycho</groupId>
-					<artifactId>target-platform-configuration</artifactId>
-					<version>${tycho-version}</version>
-					<configuration>
-						<!-- <resolver>p2</resolver> -->
-						<!-- <pomDependencies>consider</pomDependencies> -->
-						<ignoreTychoRepositories>true</ignoreTychoRepositories>
-						<target>
-							<artifact>
-								<groupId>org.lunifera.runtime</groupId>
-								<artifactId>org.lunifera.runtime.platform.juno</artifactId>
-								<version>${project.version}</version>
-							</artifact>
-						</target>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-resources-plugin</artifactId>
-					<version>2.5</version>
-					<configuration>
-						<encoding>UTF-8</encoding>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.eclipse.tycho</groupId>
-					<artifactId>tycho-surefire-plugin</artifactId>
-					<version>${tycho-version}</version>
-					<configuration>
-						<includes>
-							<include>**/*Tests.java</include>
-						</includes>
-						<showEclipseLog>true</showEclipseLog>
-						<useUIHarness>false</useUIHarness>
-						<useUIThread>false</useUIThread>
-						<failIfNoTests>false</failIfNoTests>
-						<!-- <appArgLine>-Dfile.encoding=UTF-8</appArgLine> -->
-						<argLine>-Dfile.encoding=UTF-8</argLine>
-						<!-- Kill test JVM if tests take more than 10 minutes (600 seconds) 
-							to finish -->
-						<forkedProcessTimeoutInSeconds>600</forkedProcessTimeoutInSeconds>
-					</configuration>
-				</plugin>
-				<plugin>
-					<artifactId>maven-clean-plugin</artifactId>
-					<version>2.5</version>
-				</plugin>
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>build-helper-maven-plugin</artifactId>
-					<version>1.7</version>
-				</plugin>
-			</plugins>
-		</pluginManagement>
+
 	</build>
 
 </project>

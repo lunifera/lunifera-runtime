@@ -6,7 +6,7 @@
 		<artifactId>org.lunifera.runtime</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>org.lunifera.runtime.platform.juno</artifactId>
+	<artifactId>org.lunifera.runtime.target.juno</artifactId>
 	<packaging>eclipse-target-definition</packaging>
 
 	<build>
@@ -23,7 +23,7 @@
 						</goals>
 						<configuration>
 							<targetFiles>
-								<param>org.lunifera.runtime.platform.juno.target</param>
+								<param>org.lunifera.runtime.target.juno.target</param>
 							</targetFiles>
 							<failOnError>true</failOnError>
 						</configuration>
