@@ -1,27 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde version="3.8"?>
 
-<target includeMode="feature" name="org.lunifera.runtime.target.kepler" sequenceNumber="59">
+<target includeMode="feature" name="org.lunifera.runtime.target.kepler" sequenceNumber="2">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="false" type="InstallableUnit">
-<unit id="org.hamcrest.core" version="1.1.0.v20090501071000"/>
-<unit id="org.hamcrest.integration" version="1.1.0.v20090501071000"/>
-<unit id="org.hamcrest.library" version="1.1.0.v20090501071000"/>
-<unit id="org.hamcrest" version="1.1.0.v20090501071000"/>
-<unit id="org.hamcrest.text" version="1.1.0.v20090501071000"/>
-<unit id="org.junit" version="4.10.0.v4_10_0_v20120426-0900"/>
-<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/S20121021123453/repository/"/>
-</location>
-<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="false" type="InstallableUnit">
-<unit id="org.lunifera.dependencies.feature.db4o.feature.group" version="0.0.1.201301072205"/>
-<unit id="org.lunifera.dependencies.feature.weld.feature.group" version="0.0.1.201301072205"/>
-<unit id="org.lunifera.dependencies.feature.equinox.feature.group" version="0.0.1.201301072205"/>
-<unit id="org.lunifera.dependencies.feature.jbpm.feature.group" version="0.0.1.201301072205"/>
-<repository location="http://lunifera.github.com/lunifera-p2/repository"/>
-</location>
-<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="false" type="InstallableUnit">
-<unit id="org.eclipse.persistence.jpa.feature.group" version="2.5.0.v20121016-ab08992"/>
+<unit id="org.eclipse.core.runtime.feature.feature.group" version="1.1.0.v20120521-2346-7H7OFJJBpeIn_ddTiXpom8fJ0XZ9"/>
 <repository location="http://download.eclipse.org/releases/kepler"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="false" type="InstallableUnit">
+<unit id="org.lunifera.dependencies.feature.xtext.headless.feature.group" version="2.4.0.201301150557"/>
+<unit id="org.lunifera.dependencies.feature.assert-utilities.feature.group" version="1.0.1"/>
+<unit id="org.lunifera.dependencies.feature.jbpm.feature.group" version="5.4.0.Final"/>
+<unit id="org.lunifera.dependencies.feature.weld.feature.group" version="1.2.0.201301150557"/>
+<unit id="org.lunifera.dependencies.feature.equinox.feature.group" version="3.9.0.201301150557"/>
+<repository location="http://lunifera.github.com/p2/kepler"/>
 </location>
 </locations>
 </target>
