@@ -8,50 +8,6 @@
 	</parent>
 	<artifactId>org.lunifera.runtime.p2</artifactId>
 	<packaging>eclipse-repository</packaging>
-	
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-maven-plugin</artifactId>
-				<extensions>true</extensions>
-			</plugin>
-
-			<!-- Build helper maven plugin sets the parsedVersion.osgiVersion property -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>parse-version</id>
-						<goals>
-							<goal>parse-version</goal>
-						</goals>
-						<phase>validate</phase>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-p2-publisher-plugin</artifactId>
-				<version>${tycho-version}</version>
-				<configuration>
-					<publishArtifacts>true</publishArtifacts>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-p2-repository-plugin</artifactId>
-				<version>${tycho-version}</version>
-				<configuration>
-					<includeAllDependencies>false</includeAllDependencies>
-					<createArtifactRepository>true</createArtifactRepository>
-					<compress>true</compress>
-				</configuration>
-			</plugin>
-
-		</plugins>
-	</build>
 
 	<dependencies>
 		<dependency>
@@ -74,15 +30,29 @@
 			<activation>
 				<activeByDefault>false</activeByDefault>
 				<property>
-					<name>P2_BASE_FOLDER</name>
+					<name>LUNIFERA-DEPLOY-DIR</name>
 				</property>
 			</activation>
 			<properties>
 				<from-repo>${project.build.directory}/repository</from-repo>
-				<output.dir>${P2_BASE_FOLDER}/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.${build.timestamp}</output.dir>
+				<output.dir>${PLATFORM-LUNIFERA-DEPLOY-DIR}/${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.${build.timestamp}</output.dir>
 			</properties>
 			<build>
 				<plugins>
+					<!-- Build helper maven plugin sets the parsedVersion.osgiVersion property -->
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>build-helper-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>parse-version</id>
+								<goals>
+									<goal>parse-version</goal>
+								</goals>
+								<phase>validate</phase>
+							</execution>
+						</executions>
+					</plugin>
 					<plugin>
 						<artifactId>maven-antrun-plugin</artifactId>
 						<version>1.7</version>
@@ -98,7 +68,6 @@
 											<property name="inputRepo" value="${from-repo}" />
 										</ant>
 									</target>
-
 								</configuration>
 								<goals>
 									<goal>run</goal>
