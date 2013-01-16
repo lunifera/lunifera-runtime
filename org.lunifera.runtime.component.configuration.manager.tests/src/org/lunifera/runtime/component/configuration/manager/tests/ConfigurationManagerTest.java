@@ -10,19 +10,21 @@
  *******************************************************************************/
 package org.lunifera.runtime.component.configuration.manager.tests;
 
+import static org.knowhowlab.osgi.testing.assertions.BundleAssert.assertBundleAvailable;
+import static org.knowhowlab.osgi.testing.assertions.ServiceAssert.assertServiceAvailable;
+
 import java.util.Dictionary;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.knowhowlab.osgi.testing.assertions.BundleAssert;
+import org.knowhowlab.osgi.testing.assertions.ServiceAssert;
+import org.knowhowlab.osgi.testing.utils.ServiceUtils;
+import org.lunifera.runtime.component.configuration.manager.service.IConfigurationService;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
-
-import org.lunifera.runtime.component.configuration.manager.service.IConfigurationService;
-import org.lunifera.runtime.utils.osgi.assertions.bundles.BundleAssert;
-import org.lunifera.runtime.utils.osgi.assertions.services.ServiceAssert;
-import org.lunifera.runtime.utils.osgi.assertions.services.ServiceUtils;
 
 public class ConfigurationManagerTest {
 
@@ -32,34 +34,33 @@ public class ConfigurationManagerTest {
 	public static void init() {
 		bc = FrameworkUtil.getBundle(ConfigurationManagerTest.class)
 				.getBundleContext();
-		ServiceAssert.init(bc);
-		BundleAssert.init(bc);
+		ServiceAssert.setDefaultBundleContext(bc);
+		BundleAssert.setDefaultBundleContext(bc);
 	}
-
+	
 	public void ensureNeedBundlesWasInstalled() {
-
-		BundleAssert.assertBundleAvailable(
+		
+		assertBundleAvailable(
 				"Assertions bundle is not available",
-				"org.lunifera.runtime.utils.osgi.assertions");
+				"org.knowhowlab.osgi.testing.assertions");
 
-		BundleAssert.assertBundleAvailable("DS bundle is not available",
+		assertBundleAvailable("DS bundle is not available",
 				"org.eclipse.equinox.ds");
 
-		BundleAssert.assertBundleAvailable("Services bundle is not available",
+		assertBundleAvailable("Services bundle is not available",
 				"org.eclipse.osgi.services");
 
-		BundleAssert.assertBundleAvailable("Log bundle is not available",
+		assertBundleAvailable("Log bundle is not available",
 				"org.eclipse.equinox.log");
 
-		BundleAssert.assertBundleAvailable("CM bundle is not available",
+		assertBundleAvailable("CM bundle is not available",
 				"org.eclipse.equinox.cm");
 
-		BundleAssert.assertBundleAvailable(
+		assertBundleAvailable(
 				"CM Wrapper bundle is not available",
 				"org.lunifera.runtime.component.configuration.manager");
 
-		BundleAssert
-				.assertBundleAvailable("CM fragment was not installed",
+		assertBundleAvailable("CM fragment was not installed",
 						"org.lunifera.runtime.component.configuration.manager.test.conf");
 	}
 
@@ -69,16 +70,15 @@ public class ConfigurationManagerTest {
 		ensureNeedBundlesWasInstalled();
 
 		// assert CM service is available
-		ServiceAssert.assertServiceAvailable("CM was not available",
+		assertServiceAvailable("CM was not available",
 				"org.osgi.service.cm.ConfigurationAdmin");
 
 		// assert Log service is available
-		ServiceAssert.assertServiceAvailable("LogService was not available",
+		assertServiceAvailable("LogService was not available",
 				"org.osgi.service.log.LogService");
 
 		// assert CM wrapper is available
-		ServiceAssert
-				.assertServiceAvailable(
+		assertServiceAvailable(
 						"CM Wrapper was not available",
 						"org.lunifera.runtime.component.configuration.manager.service.IConfigurationService");
 	}

@@ -65,30 +65,28 @@
 							<autoStart>true</autoStart>
 						</bundle>
 						<bundle>
+							<id>org.lunifera.runtime.component.configuration.manager.tests</id>
+							<level>4</level>
+							<autoStart>true</autoStart>
+						</bundle>
+						<bundle>
 							<id>org.lunifera.runtime.component.configuration.manager</id>
+							<level>2</level>
+							<autoStart>true</autoStart>
+						</bundle>
+						<bundle>
+							<id>org.knowhowlab.osgi.testing.assertions</id>
+							<level>2</level>
+							<autoStart>true</autoStart>
+						</bundle>
+						<bundle>
+							<id>org.knowhowlab.osgi.testing.utils</id>
 							<level>2</level>
 							<autoStart>true</autoStart>
 						</bundle>
 					</bundleStartLevel>
 
 					<dependencies>
-						<!-- p2-instalable-units -->
-						<dependency>
-							<type>p2-installable-unit</type>
-							<artifactId>org.eclipse.equinox.log</artifactId>
-							<version>0.0.0</version>
-						</dependency>
-						<dependency>
-							<type>p2-installable-unit</type>
-							<artifactId>org.eclipse.equinox.cm</artifactId>
-							<version>0.0.0</version>
-						</dependency>
-						<dependency>
-							<type>p2-installable-unit</type>
-							<artifactId>org.eclipse.equinox.ds</artifactId>
-							<version>0.0.0</version>
-						</dependency>
-
 						<!-- Plugins -->
 						<dependency>
 							<type>eclipse-plugin</type>
