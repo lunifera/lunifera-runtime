@@ -48,62 +48,45 @@
 		</profile>
 
 		<profile>
-			<id>p2-juno</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<modules>
-				<module>org.lunifera.runtime.p2</module>
-				<module>org.lunifera.runtime.target.juno</module>
-
-				<module>org.lunifera.runtime.feature.configuration.manager</module>
-				<module>org.lunifera.runtime.feature.utils.assertions</module>
-				<module>org.lunifera.runtime.utils.osgi.assertions</module>
-				<module>org.lunifera.runtime.component.configuration.manager</module>
-				<module>org.lunifera.runtime.component.configuration.manager.test.conf</module>
-				<module>org.lunifera.runtime.component.configuration.manager.tests</module>
-			</modules>
-			<build>
-				<defaultGoal>clean verify</defaultGoal>
-				<pluginManagement>
-					<plugins>
-						<plugin>
-							<groupId>org.eclipse.tycho</groupId>
-							<artifactId>target-platform-configuration</artifactId>
-							<version>${tycho-version}</version>
-							<configuration>
-								<ignoreTychoRepositories>true</ignoreTychoRepositories>
-								<target>
-									<artifact>
-										<groupId>org.lunifera.runtime</groupId>
-										<artifactId>org.lunifera.runtime.target.juno</artifactId>
-										<version>${project.version}</version>
-									</artifact>
-								</target>
-							</configuration>
-						</plugin>
-					</plugins>
-				</pluginManagement>
-			</build>
-		</profile>
-		<profile>
 			<id>p2-kepler</id>
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
+			<properties>
+				<PLATFORM-LUNIFERA-DEPLOY-DIR>${LUNIFERA-DEPLOY-DIR}/kepler/runtime</PLATFORM-LUNIFERA-DEPLOY-DIR>
+			</properties>
 			<modules>
 				<module>org.lunifera.runtime.p2</module>
 				<module>org.lunifera.runtime.target.kepler</module>
 
 				<module>org.lunifera.runtime.feature.configuration.manager</module>
-				<module>org.lunifera.runtime.feature.utils.assertions</module>
-				<module>org.lunifera.runtime.utils.osgi.assertions</module>
 				<module>org.lunifera.runtime.component.configuration.manager</module>
 				<module>org.lunifera.runtime.component.configuration.manager.test.conf</module>
 				<module>org.lunifera.runtime.component.configuration.manager.tests</module>
 			</modules>
 			<build>
 				<defaultGoal>clean verify</defaultGoal>
+				<plugins>
+<!-- 					<plugin> -->
+<!-- 						<groupId>org.eclipse.tycho.extras</groupId> -->
+<!-- 						<artifactId>target-platform-validation-plugin</artifactId> -->
+<!-- 						<version>${tychoExtrasVersion}</version> -->
+<!-- 						<executions> -->
+<!-- 							<execution> -->
+<!-- 								<phase>validate</phase> -->
+<!-- 								<goals> -->
+<!-- 									<goal>validate-target-platform</goal> -->
+<!-- 								</goals> -->
+<!-- 								<configuration> -->
+<!-- 									<targetFiles> -->
+<!-- 										<param>org.lunifera.runtime.target.kepler.target</param> -->
+<!-- 									</targetFiles> -->
+<!-- 									<failOnError>true</failOnError> -->
+<!-- 								</configuration> -->
+<!-- 							</execution> -->
+<!-- 						</executions> -->
+<!-- 					</plugin> -->
+				</plugins>
 				<pluginManagement>
 					<plugins>
 						<plugin>
@@ -143,9 +126,11 @@
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>target-platform-configuration</artifactId>
 			</plugin>
+
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-source-plugin</artifactId>
+			</plugin>
 		</plugins>
-
-
 	</build>
-
 </project>
