@@ -1,10 +1,20 @@
+<!--#======================================================================= -->
+<!--# Copyright (c) 2012, 2013 Committers of lunifera.org - Lunifera.org. -->
+<!--# All rights reserved. This program and the accompanying materials -->
+<!--# are made available under the terms of the Eclipse Public License v1.0 -->
+<!--# which accompanies this distribution, and is available at -->
+<!--# http://www.eclipse.org/legal/epl-v10.html -->
+<!--# -->
+<!--# Contributors: -->
+<!--# Cristiano Gavião - initial API and implementation -->
+<!--#======================================================================= -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>org.lunifera</groupId>
-		<artifactId>org.lunifera</artifactId>
+		<groupId>org.lunifera.releng</groupId>
+		<artifactId>org.lunifera.releng.parent.tycho.p2</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
@@ -12,125 +22,30 @@
 	<artifactId>org.lunifera.runtime</artifactId>
 
 	<packaging>pom</packaging>
-	<name>Lunifera :: Runtime Components : Parent POM</name>
 
 	<properties>
-		<next-release>0.0.2-SNAPSHOT</next-release>
+		<lunifera.deployment.p2.name>runtime</lunifera.deployment.p2.name>
+		<lunifera.build.p2.project.name>org.lunifera.runtime.p2</lunifera.build.p2.project.name>
 	</properties>
 
 	<profiles>
 		<profile>
-			<id>prepare-for-next-release</id>
+			<id>lunifera.build.p2</id>
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
 			<build>
-				<defaultGoal>org.eclipse.tycho:tycho-versions-plugin:set-version</defaultGoal>
-				<plugins>
-					<plugin>
-						<groupId>org.eclipse.tycho</groupId>
-						<artifactId>tycho-versions-plugin</artifactId>
-						<version>${tycho-version}</version>
-						<executions>
-							<execution>
-								<id>change-next-release</id>
-								<goals>
-									<goal>set-version</goal>
-								</goals>
-							</execution>
-						</executions>
-						<configuration>
-							<newVersion>${next-release}</newVersion>
-						</configuration>
-					</plugin>
-				</plugins>
+				<defaultGoal>clean verify</defaultGoal>
 			</build>
-		</profile>
-
-		<profile>
-			<id>p2-kepler</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<properties>
-				<PLATFORM-LUNIFERA-DEPLOY-DIR>${LUNIFERA-DEPLOY-DIR}/kepler/runtime</PLATFORM-LUNIFERA-DEPLOY-DIR>
-			</properties>
 			<modules>
+				<module>org.lunifera.runtime.parent</module>
 				<module>org.lunifera.runtime.p2</module>
-				<module>org.lunifera.runtime.target.kepler</module>
-
+				<!-- <module>org.lunifera.runtime.target.kepler</module> -->
 				<module>org.lunifera.runtime.feature.configuration.manager</module>
 				<module>org.lunifera.runtime.component.configuration.manager</module>
 				<module>org.lunifera.runtime.component.configuration.manager.test.conf</module>
 				<module>org.lunifera.runtime.component.configuration.manager.tests</module>
 			</modules>
-			<build>
-				<defaultGoal>clean verify</defaultGoal>
-				<plugins>
-<!-- 					<plugin> -->
-<!-- 						<groupId>org.eclipse.tycho.extras</groupId> -->
-<!-- 						<artifactId>target-platform-validation-plugin</artifactId> -->
-<!-- 						<version>${tychoExtrasVersion}</version> -->
-<!-- 						<executions> -->
-<!-- 							<execution> -->
-<!-- 								<phase>validate</phase> -->
-<!-- 								<goals> -->
-<!-- 									<goal>validate-target-platform</goal> -->
-<!-- 								</goals> -->
-<!-- 								<configuration> -->
-<!-- 									<targetFiles> -->
-<!-- 										<param>org.lunifera.runtime.target.kepler.target</param> -->
-<!-- 									</targetFiles> -->
-<!-- 									<failOnError>true</failOnError> -->
-<!-- 								</configuration> -->
-<!-- 							</execution> -->
-<!-- 						</executions> -->
-<!-- 					</plugin> -->
-				</plugins>
-				<pluginManagement>
-					<plugins>
-						<plugin>
-							<groupId>org.eclipse.tycho</groupId>
-							<artifactId>target-platform-configuration</artifactId>
-							<version>${tycho-version}</version>
-							<configuration>
-								<ignoreTychoRepositories>true</ignoreTychoRepositories>
-								<target>
-									<artifact>
-										<groupId>org.lunifera.runtime</groupId>
-										<artifactId>org.lunifera.runtime.target.kepler</artifactId>
-										<version>${project.version}</version>
-									</artifact>
-								</target>
-							</configuration>
-						</plugin>
-					</plugins>
-				</pluginManagement>
-			</build>
 		</profile>
 	</profiles>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-maven-plugin</artifactId>
-			</plugin>
-
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-compiler-plugin</artifactId>
-			</plugin>
-
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>target-platform-configuration</artifactId>
-			</plugin>
-
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-source-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
 </project>
