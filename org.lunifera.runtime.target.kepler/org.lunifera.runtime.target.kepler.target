@@ -8,12 +8,12 @@
 <repository location="http://download.eclipse.org/releases/kepler"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="false" type="InstallableUnit">
-<unit id="org.lunifera.dependencies.feature.xtext.headless.feature.group" version="2.4.0.201301161532"/>
-<unit id="org.lunifera.dependencies.feature.assert-utilities.feature.group" version="1.0.1"/>
+<unit id="org.lunifera.dependencies.feature.xtext.headless.feature.group" version="2.4.0.201301220448"/>
+<unit id="org.lunifera.dependencies.feature.assert-utilities.feature.group" version="1.1.0"/>
 <unit id="org.lunifera.dependencies.feature.jbpm.feature.group" version="5.4.0.Final"/>
-<unit id="org.lunifera.dependencies.feature.weld.feature.group" version="1.2.0.201301161532"/>
-<unit id="org.lunifera.dependencies.feature.equinox.feature.group" version="3.9.0.201301161532"/>
-<repository location="http://lunifera.github.com/p2/kepler"/>
+<unit id="org.lunifera.dependencies.feature.weld.feature.group" version="1.2.0.201301220448"/>
+<unit id="org.lunifera.dependencies.feature.equinox.feature.group" version="3.9.0.201301220448"/>
+<repository location="http://lunifera.github.com/p2/kepler/latest"/>
 </location>
 </locations>
 </target>
