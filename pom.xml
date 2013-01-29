@@ -45,6 +45,8 @@
 				<module>org.lunifera.runtime.component.configuration.manager</module>
 				<module>org.lunifera.runtime.component.configuration.manager.test.conf</module>
 				<module>org.lunifera.runtime.component.configuration.manager.tests</module>
+				<module>org.lunifera.runtime.feature.logging.equinox.over.slf4j</module>
+				<module>org.lunifera.runtime.component.logging.equinox.over.slf4j</module>
 			</modules>
 		</profile>
 	</profiles>
