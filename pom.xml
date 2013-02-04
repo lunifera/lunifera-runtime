@@ -41,6 +41,8 @@
 				<module>org.lunifera.runtime.parent</module>
 				<module>org.lunifera.runtime.p2</module>
 				<!-- <module>org.lunifera.runtime.target.kepler</module> -->
+				<module>org.lunifera.runtime.component.common</module>
+				<module>org.lunifera.runtime.feature.component.common</module>
 				<module>org.lunifera.runtime.feature.configuration.manager</module>
 				<module>org.lunifera.runtime.component.configuration.manager</module>
 				<module>org.lunifera.runtime.component.configuration.manager.test.conf</module>
