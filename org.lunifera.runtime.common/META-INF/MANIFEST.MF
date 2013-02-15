@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-Vendor: %providerName
+Bundle-Localization: OSGI-INF/l10n/bundle
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-SymbolicName: org.lunifera.runtime.common;singleton:=true
+Bundle-Version: 0.0.1.qualifier
+Bundle-ActivationPolicy: lazy
+Export-Package: org.lunifera.runtime.common.dispose,
+ org.lunifera.runtime.common.user
+Import-Package: org.osgi.service.prefs

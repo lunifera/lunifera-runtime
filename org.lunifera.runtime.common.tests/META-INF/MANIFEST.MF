@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.lunifera.runtime.common.tests
+Bundle-Version: 0.0.1.qualifier
+Bundle-Vendor: %providerName
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.junit,
+ org.lunifera.runtime.common;bundle-version="0.0.1"
+Bundle-ActivationPolicy: lazy
+Import-Package: org.knowhowlab.osgi.testing.assertions;version="1.1.0",
+ org.knowhowlab.osgi.testing.utils;version="1.1.0",
+ org.osgi.framework;version="1.7.0"

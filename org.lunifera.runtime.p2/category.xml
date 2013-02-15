@@ -13,4 +13,10 @@
       <category name="lunifera-runtime-components"/>
    </feature>
    <category-def name="lunifera-runtime-components" label="Lunifera Runtime Components"/>
+   <feature id="org.lunifera.runtime.feature.common" version="0.0.0">
+      <category name="lunifera-runtime-components"/>
+   </feature>
+   <feature id="org.lunifera.runtime.feature.common.source" version="0.0.0">
+      <category name="lunifera-runtime-components"/>
+   </feature>
 </site>
