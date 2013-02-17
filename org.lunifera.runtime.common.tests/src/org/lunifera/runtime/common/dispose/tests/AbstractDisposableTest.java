@@ -8,7 +8,7 @@
  * Contributors:
  *     Cristiano Gavião - initial API and implementation
  *******************************************************************************/
-package org.lunifera.runtime.component.configuration.manager.tests;
+package org.lunifera.runtime.common.dispose.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
