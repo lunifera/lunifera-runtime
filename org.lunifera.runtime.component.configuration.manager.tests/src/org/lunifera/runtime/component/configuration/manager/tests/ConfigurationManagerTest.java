@@ -13,7 +13,9 @@ package org.lunifera.runtime.component.configuration.manager.tests;
 import static org.knowhowlab.osgi.testing.assertions.BundleAssert.assertBundleAvailable;
 import static org.knowhowlab.osgi.testing.assertions.ServiceAssert.assertServiceAvailable;
 
+import java.io.IOException;
 import java.util.Dictionary;
+import java.util.Hashtable;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -24,7 +26,12 @@ import org.knowhowlab.osgi.testing.assertions.ServiceAssert;
 import org.knowhowlab.osgi.testing.utils.ServiceUtils;
 import org.lunifera.runtime.component.configuration.manager.service.IConfigurationService;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.Constants;
 import org.osgi.framework.FrameworkUtil;
+import org.osgi.framework.InvalidSyntaxException;
+import org.osgi.service.cm.Configuration;
+import org.osgi.service.cm.ConfigurationAdmin;
+import org.osgi.service.cm.ManagedServiceFactory;
 
 public class ConfigurationManagerTest {
 
@@ -37,11 +44,10 @@ public class ConfigurationManagerTest {
 		ServiceAssert.setDefaultBundleContext(bc);
 		BundleAssert.setDefaultBundleContext(bc);
 	}
-	
+
 	public void ensureNeedBundlesWasInstalled() {
-		
-		assertBundleAvailable(
-				"Assertions bundle is not available",
+
+		assertBundleAvailable("Assertions bundle is not available",
 				"org.knowhowlab.osgi.testing.assertions");
 
 		assertBundleAvailable("DS bundle is not available",
@@ -56,12 +62,11 @@ public class ConfigurationManagerTest {
 		assertBundleAvailable("CM bundle is not available",
 				"org.eclipse.equinox.cm");
 
-		assertBundleAvailable(
-				"CM Wrapper bundle is not available",
+		assertBundleAvailable("CM Wrapper bundle is not available",
 				"org.lunifera.runtime.component.configuration.manager");
 
 		assertBundleAvailable("CM fragment was not installed",
-						"org.lunifera.runtime.component.configuration.manager.test.conf");
+				"org.lunifera.runtime.component.configuration.manager.test.conf");
 	}
 
 	@Before
@@ -79,8 +84,8 @@ public class ConfigurationManagerTest {
 
 		// assert CM wrapper is available
 		assertServiceAvailable(
-						"CM Wrapper was not available",
-						"org.lunifera.runtime.component.configuration.manager.service.IConfigurationService");
+				"CM Wrapper was not available",
+				"org.lunifera.runtime.component.configuration.manager.service.IConfigurationService");
 	}
 
 	@Test
@@ -105,13 +110,65 @@ public class ConfigurationManagerTest {
 				"org.eclipse.equinox.http.jetty.config", "");
 
 		Assert.assertNotNull("Factory properties is null", props);
-		
+
 		Assert.assertTrue(props.size() == 3);
 
-		String actual = cms
-				.getFactoryProperty("org.eclipse.equinox.http.jetty.config",
-						"", "http.port");
+		String actual = cms.getFactoryProperty(
+				"org.eclipse.equinox.http.jetty.config", "", "http.port");
 		Assert.assertEquals("Property was not found in CM store.", "8080",
 				actual);
+	}
+
+	@Test
+	public void ensureFactoryPidIsUsedByOSGiCM() throws IOException {
+		String factoryPid = "org.lunifera.runtime.component.configuration.manager.tests.helper";
+
+		// reset all configurations
+		for (Configuration configuration : findFactoryConfigurations(factoryPid)) {
+			configuration.delete();
+		}
+
+		// register the managed service factory
+		Hashtable<String, String> props = new Hashtable<String, String>();
+		props.put(Constants.SERVICE_PID, factoryPid);
+		bc.registerService(ManagedServiceFactory.class,
+				new HelperManagedServiceFactory(), props);
+
+		IConfigurationService cms = ServiceUtils.getService(bc,
+				IConfigurationService.class);
+
+		cms.initializeFactoryConfigurationStore(factoryPid, "1001", null);
+
+		Configuration[] configs = findFactoryConfigurations(factoryPid);
+		Assert.assertEquals(1, configs.length);
+		Assert.assertEquals("1001",
+				configs[0].getProperties().get(Constants.SERVICE_PID));
+	}
+
+	/**
+	 * Looks for all factory configurations for the given factoryPid.
+	 * 
+	 * @param factoryPid
+	 * @return
+	 * @throws IOException
+	 */
+	protected Configuration[] findFactoryConfigurations(String factoryPid) {
+		Configuration[] configs = null;
+		// As ConfigurationAdmin.getConfiguration creates the configuration if
+		// it is not yet there, we check its existence first
+		try {
+			String filter = "(service.factoryPid=" + factoryPid + ")";
+
+			ConfigurationAdmin admin = ServiceUtils.getService(bc,
+					ConfigurationAdmin.class);
+
+			configs = admin.listConfigurations(filter);
+		} catch (InvalidSyntaxException e) {
+			Assert.fail(e.toString());
+		} catch (IOException e) {
+			Assert.fail(e.toString());
+		}
+
+		return configs != null ? configs : new Configuration[0];
 	}
 }
