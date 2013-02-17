@@ -12,7 +12,7 @@ package org.lunifera.runtime.component.configuration.manager.service;
 
 import java.util.Dictionary;
 
-public interface IConfigurationService  {
+public interface IConfigurationService {
 
 	static final String CONFIGURATION_INCLUDE_PATTERN_FIELD_NAME = "configurationIncludePattern";
 
@@ -20,25 +20,48 @@ public interface IConfigurationService  {
 
 	static final String CONFIGURATION_BASE_DIR_FIELD_NAME = "configurationBasedir";
 
-	public final static String	SERVICE_FACTORYPID		= "service.factoryPid";
+	public final static String SERVICE_FACTORYPID = "service.factoryPid";
 
 	/**
-	 * if not exists, it creates and initializes with the informed properties a configuration store for the informed
-	 * PID. If the store for the PID already exists it will be released and
-	 * initialized again.
+	 * This property key will be used to add the passed externalPid in
+	 * {@link #initializeFactoryConfigurationStore(String, String, Dictionary)
+	 * initializeFactoryConfigurationStore} to the properties of the created
+	 * configuration. It can be used to filter the service by its name.
+	 */
+	public final static String EXTERNAL_PID = "lunifera.externalPid";
+
+	/**
+	 * if not exists, it creates and initializes with the informed properties a
+	 * configuration store for the informed PID. If the store for the PID
+	 * already exists it will be released and initialized again.
 	 * 
 	 * @param pid
 	 */
-	void initializeConfigurationStore(String pid, Dictionary<String, Object> properties);
+	void initializeConfigurationStore(String pid,
+			Dictionary<String, Object> properties);
 
 	/**
-	 * if not exists, it creates and initializes with the informed properties a configuration store for the informed
-	 * PID. If the store for the PID already exists it will be released and
-	 * initialized again.
+	 * If not exists, it creates and initializes with the informed properties a
+	 * configuration store. If a configuration was already created for the given
+	 * externalPid, it will updated.
+	 * <p>
+	 * Attention:<br>
+	 * The passed externalPid is not the pid of the created configuration. The
+	 * use of an externalPid is required since the configuration admin
+	 * automatically creates a new pid for each configuration. The externalPid
+	 * will be added to the properties of the prepared configuration with key
+	 * {@link #EXTERNAL_PID}. And the generated pid will be returned.
 	 * 
-	 * @param pid
+	 * @param factoryPid
+	 *            The pid of the factory
+	 * @param externalPid
+	 *            The externalPid. (Not the pid!)
+	 * @param properties
+	 *            The passed properties
+	 * @return pid the pid of the created configuration
 	 */
-	void initializeFactoryConfigurationStore(String factoryPid, String pid, Dictionary<String, Object> properties);
+	String initializeFactoryConfigurationStore(String factoryPid,
+			String externalPid, Dictionary<String, Object> properties);
 
 	Dictionary<String, Object> getProperties(String pid);
 
@@ -50,15 +73,18 @@ public interface IConfigurationService  {
 
 	void putProperties(String pid, Dictionary<String, Object> properties);
 
-	Dictionary<String, Object> getFactoryProperties(String factoryPid, String pid);
-	
+	Dictionary<String, Object> getFactoryProperties(String factoryPid,
+			String pid);
+
 	String getFactoryProperty(String factoryPid, String pid, String propertyName);
-	
+
 	void deleteFactoryProperties(String factoryPid, String pid);
-	
-	void putFactoryProperty(String factoryPid, String pid, String propertyName, Object value);
-	
-	void putFactoryProperties(String factoryPid, String pid, Dictionary<String, Object> properties);
+
+	void putFactoryProperty(String factoryPid, String pid, String propertyName,
+			Object value);
+
+	void putFactoryProperties(String factoryPid, String pid,
+			Dictionary<String, Object> properties);
 
 	void displayFactoryConfiguration(String factoryPid);
 }

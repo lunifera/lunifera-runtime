@@ -12,6 +12,7 @@ package org.lunifera.runtime.component.configuration.manager.spi;
 
 import static java.util.Arrays.asList;
 import static org.osgi.framework.Constants.SERVICE_PID;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -33,7 +34,6 @@ import org.osgi.service.cm.Configuration;
 import org.osgi.service.cm.ConfigurationAdmin;
 import org.osgi.service.component.ComponentContext;
 import org.osgi.service.log.LogService;
-
 
 /**
  * To use this class you MUST ensure the the following bundles are with
@@ -280,6 +280,37 @@ public class SystemConfigurationComponent implements IConfigurationService {
 		return null;
 	}
 
+	/**
+	 * Returns the configuration for the given externalPid or <code>null</code>
+	 * if no configuration could be found.
+	 * 
+	 * @param factoryPid
+	 * @param externalPid
+	 * @return
+	 * @throws IOException
+	 */
+	protected Configuration findFactoryConfigurationForExternalPid(
+			String factoryPid, String externalPid) throws IOException {
+		try {
+			String filter = "";
+			if (externalPid != null && !externalPid.isEmpty()) {
+				filter = "(&(service.factoryPid=" + factoryPid
+						+ ") (lunifera.externalPid=" + externalPid + "))";
+			} else {
+				filter = "(service.factoryPid=" + factoryPid + ")";
+			}
+
+			Configuration[] configurations = getConfigurationAdminService()
+					.listConfigurations(filter);
+			if (configurations != null && configurations.length > 0) {
+				return configurations[0];
+			}
+		} catch (InvalidSyntaxException e) {
+		}
+
+		return null;
+	}
+
 	@Override
 	public void displayFactoryConfiguration(String factoryPid) {
 		// As ConfigurationAdmin.getConfiguration creates the configuration if
@@ -461,26 +492,34 @@ public class SystemConfigurationComponent implements IConfigurationService {
 	}
 
 	@Override
-	public void initializeFactoryConfigurationStore(String factoryPid,
-			String pid, Dictionary<String, Object> properties) {
+	public String initializeFactoryConfigurationStore(String factoryPid,
+			String externalPid, Dictionary<String, Object> properties) {
 		Configuration configuration;
 
+		String pid = null;
 		try {
 
 			if (configurationAdmin == null)
 				throw new RuntimeException(
 						"Configuration Admin Manager was not wired !!!");
 
-			configuration = configurationAdmin.createFactoryConfiguration(
-					factoryPid, null);
+			// try to find an existing configuration
+			configuration = findFactoryConfigurationForExternalPid(factoryPid,
+					externalPid);
+			if (configuration == null) {
+				// create a new configuration
+				configuration = configurationAdmin.createFactoryConfiguration(
+						factoryPid, null);
+			}
+			pid = configuration.getPid();
 
 			if (properties == null) {
 				properties = new Hashtable<String, Object>();
 			}
 
-			// add the PID as a property
-			if (pid != null && !pid.isEmpty())
-				properties.put(SERVICE_PID, pid);
+			// add the externalPid as a property
+			if (externalPid != null && !externalPid.isEmpty())
+				properties.put(EXTERNAL_PID, externalPid);
 
 			configuration.update(properties);
 
@@ -490,7 +529,7 @@ public class SystemConfigurationComponent implements IConfigurationService {
 			getLogService().log(
 					LogService.LOG_DEBUG,
 					"Initialized store under FactoryPID: '" + factoryPid
-							+ "' and PID: '" + pid
+							+ "' and PID: '" + configuration.getPid()
 							+ "' , with this properties: "
 							+ properties.toString());
 
@@ -498,6 +537,7 @@ public class SystemConfigurationComponent implements IConfigurationService {
 			getLogService().log(LogService.LOG_ERROR,
 					"Error on setup Configuration Service", e);
 		}
+		return pid;
 	}
 
 	@Override
