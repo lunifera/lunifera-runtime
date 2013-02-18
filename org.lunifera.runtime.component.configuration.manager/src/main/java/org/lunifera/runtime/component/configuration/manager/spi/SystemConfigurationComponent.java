@@ -21,10 +21,12 @@ import java.util.Collection;
 import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 
 import org.lunifera.runtime.component.configuration.manager.service.IConfigurationService;
 import org.osgi.framework.Bundle;
@@ -55,6 +57,8 @@ public class SystemConfigurationComponent implements IConfigurationService,
 	private BundleContext bundleContext;
 	private String p_includePattern;
 	private String p_excludePattern;
+
+	private Set<String> processedBundles = new HashSet<String>();
 
 	/**
 	 * It is possible to configure using a Properties File dropped on eclipse
@@ -109,6 +113,10 @@ public class SystemConfigurationComponent implements IConfigurationService,
 	 */
 	protected void scanBundle(Bundle bundle, String p_includePattern,
 			String p_excludePattern) {
+		if (bundle.getState() != Bundle.ACTIVE) {
+			return;
+		}
+
 		String root = (String) bundle.getHeaders().get(MANIFESTHEADER__CONFIG);
 		if (root == null) {
 			return;
@@ -130,8 +138,13 @@ public class SystemConfigurationComponent implements IConfigurationService,
 		}
 
 		// new bundle was installed
-		if (event.getType() == BundleEvent.INSTALLED) {
-			scanBundle(event.getBundle(), p_includePattern, p_excludePattern);
+		if (event.getType() == BundleEvent.STARTED) {
+			if (!processedBundles.contains(event.getBundle().getSymbolicName())) {
+				scanBundle(event.getBundle(), p_includePattern,
+						p_excludePattern);
+			}
+		} else if (event.getType() == BundleEvent.UNINSTALLED) {
+			processedBundles.remove(event.getBundle().getSymbolicName());
 		}
 	}
 
@@ -144,6 +157,9 @@ public class SystemConfigurationComponent implements IConfigurationService,
 	 */
 	protected void initialize(Bundle bundle, String p_basePath,
 			String p_includePattern, String p_excludePattern) {
+
+		processedBundles.add(bundle.getSymbolicName());
+
 		List<String> configFiles = scan(bundle, p_basePath,
 				asList(p_includePattern), asList(p_excludePattern));
 		for (String configFile : configFiles) {
