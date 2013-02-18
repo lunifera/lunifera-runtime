@@ -23,6 +23,16 @@ public interface IConfigurationService {
 	public final static String SERVICE_FACTORYPID = "service.factoryPid";
 
 	/**
+	 * Can be used in the manifest.mf to mark a bundle as a config bundle. The
+	 * string value following the header will be interpreted as the folder that
+	 * contains the config files.
+	 * <p>
+	 * <code>Lunifera-Config: configs</code> points to the configs folder under
+	 * root.
+	 */
+	public static final String MANIFESTHEADER__CONFIG = "Lunifera-Config";
+
+	/**
 	 * This property key will be used to add the passed externalPid in
 	 * {@link #initializeFactoryConfigurationStore(String, String, Dictionary)
 	 * initializeFactoryConfigurationStore} to the properties of the created

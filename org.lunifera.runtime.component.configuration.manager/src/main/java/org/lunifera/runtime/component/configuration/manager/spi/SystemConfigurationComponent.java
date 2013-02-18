@@ -27,7 +27,10 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.lunifera.runtime.component.configuration.manager.service.IConfigurationService;
+import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.BundleEvent;
+import org.osgi.framework.BundleListener;
 import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.wiring.BundleWiring;
 import org.osgi.service.cm.Configuration;
@@ -44,11 +47,14 @@ import org.osgi.service.log.LogService;
  * @author cvgaviao
  * 
  */
-public class SystemConfigurationComponent implements IConfigurationService {
+public class SystemConfigurationComponent implements IConfigurationService,
+		BundleListener {
 
 	private ConfigurationAdmin configurationAdmin;
 	private LogService logService;
 	private BundleContext bundleContext;
+	private String p_includePattern;
+	private String p_excludePattern;
 
 	/**
 	 * It is possible to configure using a Properties File dropped on eclipse
@@ -77,13 +83,69 @@ public class SystemConfigurationComponent implements IConfigurationService {
 		// get the configuration info from default
 		String p_basePath = (String) properties
 				.get(IConfigurationService.CONFIGURATION_BASE_DIR_FIELD_NAME);
-		String p_includePattern = (String) properties
+		p_includePattern = (String) properties
 				.get(IConfigurationService.CONFIGURATION_INCLUDE_PATTERN_FIELD_NAME);
-		String p_excludePattern = (String) properties
+		p_excludePattern = (String) properties
 				.get(IConfigurationService.CONFIGURATION_EXCLUDE_PATTERN_FIELD_NAME);
 
-		List<String> configFiles = scan(p_basePath, asList(p_includePattern),
-				asList(p_excludePattern));
+		// initialize configurations
+		initialize(bundleContext.getBundle(), p_basePath, p_includePattern,
+				p_excludePattern);
+
+		// scan all Lunifera-Config bundles for configurations
+		bundleContext.addBundleListener(this);
+		for (Bundle bundle : bundleContext.getBundles()) {
+			scanBundle(bundle, p_includePattern, p_excludePattern);
+		}
+	}
+
+	/**
+	 * Scans the given bundle for Lunifera-Config-files.
+	 * 
+	 * @param bundle
+	 *            The bundle to be scanned.
+	 * @param p_includePattern
+	 * @param p_excludePattern
+	 */
+	protected void scanBundle(Bundle bundle, String p_includePattern,
+			String p_excludePattern) {
+		String root = (String) bundle.getHeaders().get(MANIFESTHEADER__CONFIG);
+		if (root == null) {
+			return;
+		}
+		String basePath = "/";
+		if (!root.equals("")) {
+			basePath += root;
+		}
+		initialize(bundle, basePath, p_includePattern, p_excludePattern);
+	}
+
+	@Override
+	public void bundleChanged(BundleEvent event) {
+		if (event.getBundle() == this.bundleContext.getBundle()) {
+			if (event.getType() == BundleEvent.STOPPED) {
+				bundleContext.removeBundleListener(this);
+				return;
+			}
+		}
+
+		// new bundle was installed
+		if (event.getType() == BundleEvent.INSTALLED) {
+			scanBundle(event.getBundle(), p_includePattern, p_excludePattern);
+		}
+	}
+
+	/**
+	 * Initializes the configuration after activating.
+	 * 
+	 * @param p_basePath
+	 * @param p_includePattern
+	 * @param p_excludePattern
+	 */
+	protected void initialize(Bundle bundle, String p_basePath,
+			String p_includePattern, String p_excludePattern) {
+		List<String> configFiles = scan(bundle, p_basePath,
+				asList(p_includePattern), asList(p_excludePattern));
 		for (String configFile : configFiles) {
 
 			Map<String, String> pids = extractPidsFromConfigFileName(configFile);
@@ -97,7 +159,6 @@ public class SystemConfigurationComponent implements IConfigurationService {
 				initializeConfigurationStore(pids.get(SERVICE_PID), values);
 			}
 		}
-
 	}
 
 	protected void bindConfigurationAdmin(ConfigurationAdmin configurationAdmin) {
@@ -113,6 +174,7 @@ public class SystemConfigurationComponent implements IConfigurationService {
 
 	protected void deactivate(ComponentContext context,
 			Map<String, Object> properties) {
+		bundleContext.removeBundleListener(this);
 		bundleContext = null;
 
 		getLogService().log(LogService.LOG_DEBUG,
@@ -659,12 +721,11 @@ public class SystemConfigurationComponent implements IConfigurationService {
 
 	}
 
-	protected List<String> scan(String basedir, List<String> includes,
-			List<String> excludes) {
+	protected List<String> scan(Bundle bundle, String basedir,
+			List<String> includes, List<String> excludes) {
 
 		List<String> scannedItens = new ArrayList<String>();
-		BundleWiring wiring = bundleContext.getBundle().adapt(
-				BundleWiring.class);
+		BundleWiring wiring = bundle.adapt(BundleWiring.class);
 
 		if (includes != null) {
 			for (String filePattern : includes) {
