@@ -149,7 +149,8 @@ public class SystemConfigurationComponent implements IConfigurationService,
 		for (String configFile : configFiles) {
 
 			Map<String, String> pids = extractPidsFromConfigFileName(configFile);
-			Dictionary<String, Object> values = dictionaryFromPropertiesFile(configFile);
+			Dictionary<String, Object> values = dictionaryFromPropertiesFile(
+					bundle, configFile);
 
 			if (pids.containsKey(SERVICE_FACTORYPID)) {
 				initializeFactoryConfigurationStore(
@@ -228,13 +229,13 @@ public class SystemConfigurationComponent implements IConfigurationService,
 	}
 
 	private Dictionary<String, Object> dictionaryFromPropertiesFile(
-			String configFile) {
+			Bundle bundle, String configFile) {
 		// Read properties file.
 		Properties properties = new Properties();
 		Dictionary<String, Object> map = new Hashtable<String, Object>();
 
 		try {
-			URL configURL = bundleContext.getBundle().getResource(configFile);
+			URL configURL = bundle.getResource(configFile);
 			if (configURL != null) {
 				InputStream input = null;
 				try {
