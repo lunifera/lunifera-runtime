@@ -116,22 +116,10 @@ public class ConfigurationManagerTest {
 				props.get("http.port"));
 	}
 
+	// TODO - Implement with new version of ConfigurationManager
 	@Test
 	public void ensureFactoryPidWithDefaultPidWasRegistered() {
 
-		IConfigurationService cms = ServiceUtils.getService(bc,
-				IConfigurationService.class);
-		Dictionary<String, Object> props = cms.getFactoryProperties(
-				"org.eclipse.equinox.http.jetty.config", "");
-
-		Assert.assertNotNull("Factory properties is null", props);
-
-		Assert.assertTrue(props.size() == 3);
-
-		String actual = cms.getFactoryProperty(
-				"org.eclipse.equinox.http.jetty.config", "", "http.port");
-		Assert.assertEquals("Property was not found in CM store.", "8080",
-				actual);
 	}
 
 	/**
