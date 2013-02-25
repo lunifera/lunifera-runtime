@@ -284,7 +284,7 @@ public class SystemConfigurationComponent implements IConfigurationService,
 
 	private Map<String, String> extractPidsFromConfigFileName(String configFile) {
 		Map<String, String> pids = new HashMap<String, String>(2);
-		String separator = System.getProperty("file.separator");
+		String separator = "/";
 		String filename;
 
 		// Remove the path up to the filename.
