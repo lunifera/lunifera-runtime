@@ -9,6 +9,8 @@ Require-Bundle: org.junit,
  org.knowhowlab.osgi.testing.utils;bundle-version="1.1.0",
  org.knowhowlab.osgi.testing.assertions;bundle-version="1.1.0",
  org.eclipse.osgi,
- org.eclipse.osgi.services
+ org.eclipse.osgi.services,
+ org.eclipse.equinox.ds,
+ org.eclipse.equinox.cm
 Import-Package: org.lunifera.runtime.component.configuration.manager.service
 Bundle-ActivationPolicy: lazy
