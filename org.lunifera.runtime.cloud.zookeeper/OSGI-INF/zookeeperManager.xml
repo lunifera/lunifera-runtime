@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" name="org.lunifera.runtime.cloud.zookeeper.manager">
+   <implementation class="org.lunifera.runtime.cloud.zookeeper.internal.client.ZookeeperClientService"/>
+   <service>
+      <provide interface="org.osgi.service.cm.ManagedService"/>
+   </service>
+   <reference bind="bindPreferences" cardinality="1..1" interface="org.osgi.service.prefs.PreferencesService" name="preferences" policy="static" unbind="unbindPreferences"/>
+</scr:component>

@@ -45,6 +45,9 @@
 				<module>org.lunifera.runtime.common.tests</module>
 				<module>org.lunifera.runtime.feature.common</module>
 				
+				<module>org.lunifera.runtime.cloud.zookeeper</module>
+				<module>org.lunifera.runtime.cloud.zookeeper.tests</module>
+				
 				<module>org.lunifera.runtime.component.common</module>
 				<module>org.lunifera.runtime.feature.component.common</module>
 				<module>org.lunifera.runtime.feature.configuration.manager</module>
