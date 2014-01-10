@@ -13,13 +13,14 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>org.lunifera.releng</groupId>
-		<artifactId>org.lunifera.releng.parent.tycho.p2</artifactId>
+		<groupId>org.lunifera.releng.maven</groupId>
+		<artifactId>org.lunifera.releng.maven.parent.tycho.aggregator</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
+		<relativePath />
 	</parent>
 
 	<groupId>org.lunifera.runtime</groupId>
-	<artifactId>org.lunifera.runtime</artifactId>
+	<artifactId>org.lunifera.runtime.aggregator</artifactId>
 
 	<packaging>pom</packaging>
 
@@ -30,7 +31,7 @@
 
 	<profiles>
 		<profile>
-			<id>lunifera.build.p2</id>
+			<id>lunifera.build.features</id>
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
@@ -39,20 +40,31 @@
 			</build>
 			<modules>
 				<module>org.lunifera.runtime.parent</module>
-				<module>org.lunifera.runtime.p2</module>
 				<!-- <module>org.lunifera.runtime.target.kepler</module> -->
 				<module>org.lunifera.runtime.common</module>
-				<module>org.lunifera.runtime.common.tests</module>
+<!-- 				<module>org.lunifera.runtime.common.tests</module> -->
 				<module>org.lunifera.runtime.feature.common</module>
-				
+
 				<module>org.lunifera.runtime.component.common</module>
 				<module>org.lunifera.runtime.feature.component.common</module>
 				<module>org.lunifera.runtime.feature.configuration.manager</module>
 				<module>org.lunifera.runtime.component.configuration.manager</module>
-				<module>org.lunifera.runtime.component.configuration.manager.test.conf</module>
-				<module>org.lunifera.runtime.component.configuration.manager.tests</module>
+<!-- 				<module>org.lunifera.runtime.component.configuration.manager.test.conf</module> -->
+<!-- 				<module>org.lunifera.runtime.component.configuration.manager.tests</module> -->
 				<module>org.lunifera.runtime.feature.logging.equinox.over.slf4j</module>
 				<module>org.lunifera.runtime.component.logging.equinox.over.slf4j</module>
+			</modules>
+		</profile>
+		<profile>
+			<id>lunifera.build.p2</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<defaultGoal>clean verify</defaultGoal>
+			</build>
+			<modules>
+				<module>org.lunifera.runtime.p2</module>
 			</modules>
 		</profile>
 	</profiles>

@@ -585,6 +585,11 @@ public class SystemConfigurationComponent implements IConfigurationService,
 			// try to find an existing configuration
 			configuration = findFactoryConfigurationForExternalPid(factoryPid,
 					externalPid);
+			if(configuration != null){
+				// nothing to do. Configuration was created earlier! 
+				return configuration.getPid();
+			}
+			
 			if (configuration == null) {
 				// create a new configuration
 				configuration = configurationAdmin.createFactoryConfiguration(

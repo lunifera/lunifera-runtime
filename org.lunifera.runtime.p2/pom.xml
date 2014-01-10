@@ -21,11 +21,11 @@
 	<packaging>eclipse-repository</packaging>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.lunifera.runtime</groupId>
-			<artifactId>org.lunifera.runtime.component.configuration.manager.tests</artifactId>
-			<version>${project.version}</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.lunifera.runtime</groupId> -->
+<!-- 			<artifactId>org.lunifera.runtime.component.configuration.manager.tests</artifactId> -->
+<!-- 			<version>${project.version}</version> -->
+<!-- 		</dependency> -->
 		<dependency>
 			<groupId>org.lunifera.runtime</groupId>
 			<artifactId>
