@@ -11,7 +11,6 @@ Require-Bundle: org.junit,
  org.eclipse.osgi,
  org.eclipse.osgi.services,
  org.eclipse.equinox.ds,
- org.eclipse.equinox.cm,
- org.eclipse.equinox.log
+ org.eclipse.equinox.cm
 Import-Package: org.lunifera.runtime.component.configuration.manager.service
 Bundle-ActivationPolicy: lazy

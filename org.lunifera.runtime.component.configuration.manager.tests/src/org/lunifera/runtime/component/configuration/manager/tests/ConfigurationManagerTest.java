@@ -71,9 +71,6 @@ public class ConfigurationManagerTest {
 		assertBundleAvailable("Services bundle is not available",
 				"org.eclipse.osgi.services");
 
-		assertBundleAvailable("Log bundle is not available",
-				"org.eclipse.equinox.log");
-
 		assertBundleAvailable("CM bundle is not available",
 				"org.eclipse.equinox.cm");
 
