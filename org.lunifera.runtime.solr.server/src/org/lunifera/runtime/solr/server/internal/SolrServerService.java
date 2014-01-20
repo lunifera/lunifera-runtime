@@ -10,30 +10,35 @@ package org.lunifera.runtime.solr.server.internal;
 import org.apache.solr.core.CoreContainer;
 import org.lunifera.runtime.solr.server.ILuniferaEmbeddedSolrServer;
 import org.lunifera.runtime.solr.server.ISolrServerService;
-import org.osgi.service.component.ComponentContext;
+import org.osgi.service.log.LogService;
 
 public class SolrServerService implements ISolrServerService {
 
-	private CoreContainer coreContainer;
+	private LogService logService;
 	private ILuniferaEmbeddedSolrServer luniferaEmbeddedSolrServer;
 
-	public void activate(ComponentContext ctx) {
-	}
-	
-	public void deactivate(ComponentContext ctx) {
-	}
-	
 	protected synchronized void bindCoreContainer(CoreContainer coreContainer) {
-		this.coreContainer = coreContainer;
+		// TODO these params should be configured via CM
+		luniferaEmbeddedSolrServer = new LuniferaEmbeddedSolrServer(
+				coreContainer, "Lunifera", "/path/to/your/solrconf");
 	}
 
 	protected synchronized void unbindCoreContainer(CoreContainer coreContainer) {
-		this.coreContainer = null;
+		luniferaEmbeddedSolrServer = null;
+	}
+	
+	protected synchronized void bindLogService(LogService logService) {
+		this.logService = logService;
+	}
+
+	protected synchronized void unbindLogService(LogService logService) {
+		this.logService = null;
 	}
 
 	@Override
 	public ILuniferaEmbeddedSolrServer getEmbeddedSolrServer() {
-		return null;
+		logService.log(LogService.LOG_INFO, "Returning instance of LuniferaEmbeddedSolrServer.");
+		return luniferaEmbeddedSolrServer;
 	}
 
 }
