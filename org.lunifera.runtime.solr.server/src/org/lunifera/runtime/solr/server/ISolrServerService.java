@@ -7,16 +7,24 @@
  ******************************************************************************/
 package org.lunifera.runtime.solr.server;
 
+import java.io.IOException;
+
+import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.response.UpdateResponse;
+import org.apache.solr.common.SolrInputDocument;
+
 /**
  * Provides an instance of EmbeddedSolrServer to other services.
  */
 public interface ISolrServerService {
 
 	/**
-	 * Provides an instance of an EmbeddedSolrServer
+	 * Adds a single document.
 	 * 
-	 * @return EmbeddedSolrServer
+	 * @param document The document to be inserted.
+	 * @return UpdateResponse
 	 */
-	ILuniferaEmbeddedSolrServer getEmbeddedSolrServer();
+	UpdateResponse addDocument(SolrInputDocument document) 
+			throws SolrServerException, IOException;
 	
 }

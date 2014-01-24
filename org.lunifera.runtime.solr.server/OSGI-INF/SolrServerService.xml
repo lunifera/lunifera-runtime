@@ -6,4 +6,5 @@
    </service>
    <reference bind="bindCoreContainer" cardinality="1..1" interface="org.apache.solr.core.CoreContainer" name="CoreContainer" policy="static" unbind="unbindCoreContainer"/>
    <reference bind="bindLogService" cardinality="1..1" interface="org.osgi.service.log.LogService" name="LogService" policy="static" unbind="unbindLogService"/>
+   <properties entry="conf/solrserver.conf"/>
 </scr:component>

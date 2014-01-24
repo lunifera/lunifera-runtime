@@ -7,26 +7,73 @@
  ******************************************************************************/
 package org.lunifera.runtime.solr.server.internal;
 
+import java.io.IOException;
+
+import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.embedded.EmbeddedSolrServer;
+import org.apache.solr.client.solrj.response.UpdateResponse;
+import org.apache.solr.common.SolrInputDocument;
 import org.apache.solr.core.CoreContainer;
-import org.lunifera.runtime.solr.server.ILuniferaEmbeddedSolrServer;
+import org.apache.solr.core.CoreDescriptor;
+import org.apache.solr.core.SolrCore;
 import org.lunifera.runtime.solr.server.ISolrServerService;
+import org.osgi.service.component.ComponentContext;
 import org.osgi.service.log.LogService;
 
 public class SolrServerService implements ISolrServerService {
 
+	private static final String NAME_PROPERTY = "name";
+	private static final String INSTANCEDIR_PROPERTY = "instanceDir";
+
 	private LogService logService;
-	private ILuniferaEmbeddedSolrServer luniferaEmbeddedSolrServer;
+
+	private CoreContainer coreContainer;
+	private EmbeddedSolrServer server;
+
+	private String name;
+	private String instanceDir;
+
+	protected void activate(ComponentContext context) {
+		logService.log(LogService.LOG_DEBUG, "activated");
+		
+		// TODO these params should be configured via CM
+		if (context.getProperties().get(NAME_PROPERTY) != null) { 
+			name = context.getProperties().get(NAME_PROPERTY).toString();
+		}
+		if (context.getProperties().get(INSTANCEDIR_PROPERTY) != null) {
+			instanceDir = context.getProperties().get(INSTANCEDIR_PROPERTY).toString();
+		}
+		
+		server = initialize(name, instanceDir);
+	}
+
+	protected void deactivate(ComponentContext context) {
+		logService.log(LogService.LOG_DEBUG, "deactivated");
+		if (server != null) {
+			server.shutdown();
+		}
+	}
+
+	protected void modified(ComponentContext context) {
+		logService.log(LogService.LOG_DEBUG, "modified");
+		
+		name = context.getProperties().get(NAME_PROPERTY).toString();
+		instanceDir = context.getProperties().get(INSTANCEDIR_PROPERTY).toString();
+		
+		if (server != null) {
+			server.shutdown();
+		}
+		server = initialize(name, instanceDir);
+	}
 
 	protected synchronized void bindCoreContainer(CoreContainer coreContainer) {
-		// TODO these params should be configured via CM
-		luniferaEmbeddedSolrServer = new LuniferaEmbeddedSolrServer(
-				coreContainer, "Lunifera", "/path/to/your/solrconf");
+		this.coreContainer = coreContainer;
 	}
 
 	protected synchronized void unbindCoreContainer(CoreContainer coreContainer) {
-		luniferaEmbeddedSolrServer = null;
+		this.coreContainer = null;
 	}
-	
+
 	protected synchronized void bindLogService(LogService logService) {
 		this.logService = logService;
 	}
@@ -36,9 +83,20 @@ public class SolrServerService implements ISolrServerService {
 	}
 
 	@Override
-	public ILuniferaEmbeddedSolrServer getEmbeddedSolrServer() {
-		logService.log(LogService.LOG_INFO, "Returning instance of LuniferaEmbeddedSolrServer.");
-		return luniferaEmbeddedSolrServer;
+	public UpdateResponse addDocument(SolrInputDocument document) throws SolrServerException,
+			IOException {
+		return server.add(document);
+	}
+
+	private EmbeddedSolrServer initialize(String name, String instanceDir) {
+		if (name == null || instanceDir == null) {
+			throw new RuntimeException("Core name and instance dir must be configured.");
+		}
+
+		CoreDescriptor coreDescriptor = new CoreDescriptor(coreContainer, name, instanceDir);
+		SolrCore solrCore = coreContainer.create(coreDescriptor);
+		coreContainer.register(solrCore, false);
+		return new EmbeddedSolrServer(coreContainer, name);
 	}
 
 }
