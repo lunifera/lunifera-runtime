@@ -1,0 +1,3 @@
+# copy and rename this file to solrserver.conf
+name=Lunifera
+instanceDir=/path/to/your/instancedir
