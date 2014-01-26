@@ -12,3 +12,4 @@ plugin.xml_gen
 .project
 /build.runtime.kepler.latest.log.properties
 **/log
+solrserver.conf
