@@ -8,11 +8,14 @@
 package org.lunifera.runtime.solr.server.internal;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.embedded.EmbeddedSolrServer;
+import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.client.solrj.response.UpdateResponse;
 import org.apache.solr.common.SolrInputDocument;
+import org.apache.solr.common.params.SolrParams;
 import org.apache.solr.core.CoreContainer;
 import org.apache.solr.core.CoreDescriptor;
 import org.apache.solr.core.SolrCore;
@@ -86,6 +89,31 @@ public class SolrServerService implements ISolrServerService {
 	public UpdateResponse addDocument(SolrInputDocument document) throws SolrServerException,
 			IOException {
 		return server.add(document);
+	}
+	
+	@Override
+	public QueryResponse query(SolrParams params) throws SolrServerException {
+		return server.query(params);
+	}
+
+	@Override
+	public UpdateResponse deleteAll() throws SolrServerException, IOException {
+		return server.deleteByQuery("*:*");
+	}
+
+	@Override
+	public UpdateResponse deleteById(List<String> ids) throws SolrServerException, IOException {
+		return server.deleteById(ids);
+	}
+
+	@Override
+	public UpdateResponse deleteByQuery(String query) throws SolrServerException, IOException {
+		return server.deleteByQuery(query);
+	}
+	
+	@Override
+	public UpdateResponse commit() throws SolrServerException, IOException {
+		return server.commit();
 	}
 
 	private EmbeddedSolrServer initialize(String name, String instanceDir) {
