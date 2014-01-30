@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: SolrServerServiceTest
+Bundle-SymbolicName: org.lunifera.runtime.solr.server.tests
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Service-Component: OSGI-INF/SolrServerServiceTest.xml
+Import-Package: org.lunifera.runtime.solr.server
+Require-Bundle: org.apache.stanbol.commons.solr.core,
+ org.lunifera.solr.deps;bundle-version="1.0.0"
