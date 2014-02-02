@@ -8,6 +8,7 @@
 package org.lunifera.runtime.solr.server.internal;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 
 import org.apache.solr.client.solrj.SolrServerException;
@@ -92,6 +93,12 @@ public class SolrServerService implements ISolrServerService {
 	}
 	
 	@Override
+	public UpdateResponse addDocuments(Collection<SolrInputDocument> documents)
+			throws SolrServerException, IOException {
+		return server.add(documents);
+	}
+
+	@Override
 	public QueryResponse query(SolrParams params) throws SolrServerException {
 		return server.query(params);
 	}
@@ -102,7 +109,12 @@ public class SolrServerService implements ISolrServerService {
 	}
 
 	@Override
-	public UpdateResponse deleteById(List<String> ids) throws SolrServerException, IOException {
+	public UpdateResponse deleteById(String id) throws SolrServerException, IOException {
+		return server.deleteById(id);
+	}
+
+	@Override
+	public UpdateResponse deleteByIds(List<String> ids) throws SolrServerException, IOException {
 		return server.deleteById(ids);
 	}
 
@@ -114,6 +126,11 @@ public class SolrServerService implements ISolrServerService {
 	@Override
 	public UpdateResponse commit() throws SolrServerException, IOException {
 		return server.commit();
+	}
+	
+	@Override
+	public UpdateResponse rollback() throws SolrServerException, IOException {
+		return server.rollback();
 	}
 
 	private EmbeddedSolrServer initialize(String name, String instanceDir) {

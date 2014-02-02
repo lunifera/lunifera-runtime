@@ -8,6 +8,7 @@
 package org.lunifera.runtime.solr.server;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 
 import org.apache.solr.client.solrj.SolrServerException;
@@ -33,6 +34,17 @@ public interface ISolrServerService {
 			throws SolrServerException, IOException;
 	
 	/**
+	 * Adds a collection of documents.
+	 * 
+	 * @param documents A collection of documents to be inserted.
+	 * @return UpdateResponse
+	 * @throws SolrServerException
+	 * @throws IOException
+	 */
+	UpdateResponse addDocuments(Collection<SolrInputDocument> documents) 
+			throws SolrServerException, IOException;
+	
+	/**
 	 * Queries a document stored in Solr.
 	 * 
 	 * @param params
@@ -53,6 +65,18 @@ public interface ISolrServerService {
             throws SolrServerException, IOException;
 	
 	/**
+	 * Deletes a single document stored in Solr by using its ID.
+	 * 
+	 * @param id
+	 * @return UpdateResponse
+	 * @throws SolrServerException
+	 * @throws IOException
+	 */
+	UpdateResponse deleteById(String id)
+            throws SolrServerException,
+                   IOException;
+	
+	/**
 	 * Deletes documents stored in Solr by using their IDs. 
 	 * 
 	 * @param ids
@@ -60,7 +84,7 @@ public interface ISolrServerService {
 	 * @throws SolrServerException
 	 * @throws IOException
 	 */
-	UpdateResponse deleteById(List<String> ids)
+	UpdateResponse deleteByIds(List<String> ids)
               throws SolrServerException, IOException;
 	
 	/**
@@ -82,6 +106,17 @@ public interface ISolrServerService {
 	 * @throws IOException
 	 */
 	UpdateResponse commit()
+            throws SolrServerException,
+                   IOException;
+	
+	/**
+	 * Roll back all changes since the last commit.
+	 * 
+	 * @return UpdateResponse
+	 * @throws SolrServerException
+	 * @throws IOException
+	 */
+	UpdateResponse rollback()
             throws SolrServerException,
                    IOException;
 }
