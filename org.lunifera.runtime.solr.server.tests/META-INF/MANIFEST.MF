@@ -5,6 +5,8 @@ Bundle-SymbolicName: org.lunifera.runtime.solr.server.tests
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Service-Component: OSGI-INF/SolrServerServiceTest.xml
-Import-Package: org.lunifera.runtime.solr.server
+Import-Package: org.lunifera.runtime.solr.server,
+ org.osgi.framework;version="1.7.0"
 Require-Bundle: org.apache.stanbol.commons.solr.core,
- org.lunifera.solr.deps;bundle-version="1.0.0"
+ org.lunifera.solr.deps;bundle-version="1.0.0",
+ org.junit;bundle-version="4.11.0"
