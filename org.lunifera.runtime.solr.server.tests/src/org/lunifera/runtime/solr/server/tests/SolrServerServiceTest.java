@@ -42,7 +42,7 @@ public class SolrServerServiceTest {
 	private static final String QUERY_ALL = "*:*";
 
 	private static CountDownLatch dependencyLatch = new CountDownLatch(1);
-	private ISolrServerService solrServerService;
+	private static ISolrServerService solrServerService;
 	
 	private static SolrInputDocument dtoDoc;
 	private static SolrInputDocument entityDoc;
@@ -208,13 +208,13 @@ public class SolrServerServiceTest {
 		System.out.println("Inserting 500 documents took " + insertDuration + "ms.");
 	}
 	
-	protected void bindSolrServerService(ISolrServerService solrServerService) {
-		this.solrServerService = solrServerService;
+	protected void bindSolrServerService(ISolrServerService service) {
+		solrServerService = service;
 		dependencyLatch.countDown();
 	}
 
-	protected void unbindSolrServerService(ISolrServerService solrServerService) {
-		this.solrServerService = null;
+	protected void unbindSolrServerService(ISolrServerService service) {
+		solrServerService = null;
 	}
 
 }
