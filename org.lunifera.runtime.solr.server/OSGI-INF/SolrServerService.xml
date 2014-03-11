@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" name="Sorg.lunifera.runtime.solr.server">
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" name="org.lunifera.runtime.solr.server">
    <implementation class="org.lunifera.runtime.solr.server.internal.SolrServerService"/>
    <service>
       <provide interface="org.lunifera.runtime.solr.server.ISolrServerService"/>
