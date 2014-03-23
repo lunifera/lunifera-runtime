@@ -11,6 +11,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import static org.lunifera.runtime.solr.server.LuniferaDocFields.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,10 +36,6 @@ import org.lunifera.runtime.solr.server.ISolrServerService;
 @RunWith(JUnit4.class)
 public class SolrServerServiceTest {
 
-	private static final String URI = "uri";
-	private static final String DOC_VERSION = "doc_version";
-	private static final String RAW_CONTENT = "raw_content";
-	
 	private static final String QUERY_ALL = "*:*";
 
 	private static CountDownLatch dependencyLatch = new CountDownLatch(1);
@@ -54,24 +51,24 @@ public class SolrServerServiceTest {
 	@BeforeClass
 	public static void setUpTestData() {
 		dtoDoc = new SolrInputDocument();
-		dtoDoc.addField(URI, "doc://dto://org.lunifera.sample.dto.MyDTODoc");
-		dtoDoc.addField(DOC_VERSION, 1.0);
-		dtoDoc.addField(RAW_CONTENT, "test dto content");
+		dtoDoc.addField(URI.fieldName(), "doc://dto://org.lunifera.sample.dto.MyDTODoc");
+		dtoDoc.addField(DOC_VERSION.fieldName(), 1.0);
+		dtoDoc.addField(RAW_CONTENT.fieldName(), "test dto content");
 
 		entityDoc = new SolrInputDocument();
-		entityDoc.addField(URI, "doc://entity://org.lunifera.sample.entity.MyEntityDoc");
-		entityDoc.addField(DOC_VERSION, 0.8);
-		entityDoc.addField(RAW_CONTENT, "test entity content");
+		entityDoc.addField(URI.fieldName(), "doc://entity://org.lunifera.sample.entity.MyEntityDoc");
+		entityDoc.addField(DOC_VERSION.fieldName(), 0.8);
+		entityDoc.addField(RAW_CONTENT.fieldName(), "test entity content");
 
 		viewDoc = new SolrInputDocument();
-		viewDoc.addField(URI, "doc://view://org.lunifera.sample.view.MyViewDoc");
-		viewDoc.addField(DOC_VERSION, 1.2);
-		viewDoc.addField(RAW_CONTENT, "test view content");
+		viewDoc.addField(URI.fieldName(), "doc://view://org.lunifera.sample.view.MyViewDoc");
+		viewDoc.addField(DOC_VERSION.fieldName(), 1.2);
+		viewDoc.addField(RAW_CONTENT.fieldName(), "test view content");
 
 		uiDoc = new SolrInputDocument();
-		uiDoc.addField(URI, "doc://ui://org.lunifera.sample.ui.MyUIDoc");
-		uiDoc.addField(DOC_VERSION, 1.5);
-		uiDoc.addField(RAW_CONTENT, "test ui content");
+		uiDoc.addField(URI.fieldName(), "doc://ui://org.lunifera.sample.ui.MyUIDoc");
+		uiDoc.addField(DOC_VERSION.fieldName(), 1.5);
+		uiDoc.addField(RAW_CONTENT.fieldName(), "test ui content");
 
 		documents = new ArrayList<>();
 		documents.add(dtoDoc);
@@ -82,9 +79,9 @@ public class SolrServerServiceTest {
 		loadTestDocs = new ArrayList<>();
 		for (int i = 1; i <= 500; i++) {
 			SolrInputDocument doc = new SolrInputDocument();
-			doc.addField(URI, "uri_" + i);
-			doc.addField(DOC_VERSION, 1.0);
-			doc.addField(RAW_CONTENT, "content_" + i);
+			doc.addField(URI.fieldName(), "uri_" + i);
+			doc.addField(DOC_VERSION.fieldName(), 1.0);
+			doc.addField(RAW_CONTENT.fieldName(), "content_" + i);
 			loadTestDocs.add(doc);
 		}
 	}
