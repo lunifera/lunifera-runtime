@@ -22,5 +22,5 @@
 	<artifactId>org.lunifera.runtime.target.kepler</artifactId>
 	<packaging>eclipse-target-definition</packaging>
 
-	<version>0.7.0</version>
+	<version>0.7.1-SNAPSHOT</version>
 </project>
