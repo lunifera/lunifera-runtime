@@ -40,20 +40,40 @@
 			</build>
 			<modules>
 				<module>org.lunifera.runtime.parent</module>
-				<!-- <module>org.lunifera.runtime.target.kepler</module> -->
 				<module>org.lunifera.runtime.common</module>
-<!-- 				<module>org.lunifera.runtime.common.tests</module> -->
 				<module>org.lunifera.runtime.feature.common</module>
-
-				<module>org.lunifera.runtime.component.common</module>
-				<module>org.lunifera.runtime.feature.component.common</module>
-				<module>org.lunifera.runtime.feature.configuration.manager</module>
-				<module>org.lunifera.runtime.component.configuration.manager</module>
-<!-- 				<module>org.lunifera.runtime.component.configuration.manager.test.conf</module> -->
-<!-- 				<module>org.lunifera.runtime.component.configuration.manager.tests</module> -->
-				<module>org.lunifera.runtime.feature.logging.equinox.over.slf4j</module>
-				<module>org.lunifera.runtime.component.logging.equinox.over.slf4j</module>
 			</modules>
+		</profile>
+		<profile>
+			<id>prepare-for-next-release</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<defaultGoal>org.eclipse.tycho:tycho-versions-plugin:set-version</defaultGoal>
+				<plugins>
+					<plugin>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>tycho-versions-plugin</artifactId>
+						<version>${tycho-version}</version>
+						<executions>
+							<execution>
+								<id>change-next-release</id>
+								<goals>
+									<goal>set-version</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<newVersion>${next-release}</newVersion>
+							<artifacts>org.lunifera.runtime.aggregator,
+								org.lunifera.runtime.parent,
+								org.lunifera.runtime.p2
+							</artifacts>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 		<profile>
 			<id>lunifera.build.p2</id>

@@ -123,30 +123,15 @@
 		</profile>
 	</profiles>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.lunifera.runtime</groupId>
-				<artifactId>org.lunifera.runtime.parent</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
-
-	<dependencies>
-		<!-- <dependency> -->
-		<!-- <groupId>org.lunifera.runtime</groupId> -->
-		<!-- <artifactId>org.lunifera.runtime.component.configuration.manager.tests</artifactId> -->
-		<!-- <version>${project.version}</version> -->
-		<!-- </dependency> -->
-		<dependency>
-			<groupId>org.lunifera.runtime</groupId>
-			<artifactId>
-				org.lunifera.runtime.feature.configuration.manager
-			</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-	</dependencies>
+<!-- 	<dependencyManagement> -->
+<!-- 		<dependencies> -->
+<!-- 			<dependency> -->
+<!-- 				<groupId>org.lunifera.runtime</groupId> -->
+<!-- 				<artifactId>org.lunifera.runtime.parent</artifactId> -->
+<!-- 				<version>0.0.1-SNAPSHOT</version> -->
+<!-- 				<type>pom</type> -->
+<!-- 				<scope>import</scope> -->
+<!-- 			</dependency> -->
+<!-- 		</dependencies> -->
+<!-- 	</dependencyManagement> -->
 </project>
