@@ -1,22 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature id="org.lunifera.runtime.feature.configuration.manager" version="0.0.0">
-      <category name="lunifera-runtime-components"/>
-   </feature>
-   <feature id="org.lunifera.runtime.feature.configuration.manager.source" version="0.0.0">
-      <category name="lunifera-runtime-components"/>
-   </feature>
-   <feature id="org.lunifera.runtime.feature.logging.equinox.over.slf4j" version="0.0.0">
-      <category name="lunifera-runtime-components"/>
-   </feature>
-   <feature id="org.lunifera.runtime.feature.logging.equinox.over.slf4j.source" version="0.0.0">
-      <category name="lunifera-runtime-components"/>
-   </feature>
-   <category-def name="lunifera-runtime-components" label="Lunifera Runtime Components"/>
    <feature id="org.lunifera.runtime.feature.common" version="0.0.0">
       <category name="lunifera-runtime-components"/>
    </feature>
    <feature id="org.lunifera.runtime.feature.common.source" version="0.0.0">
       <category name="lunifera-runtime-components"/>
    </feature>
+   <category-def name="lunifera-runtime-components" label="Lunifera Runtime Components"/>
 </site>

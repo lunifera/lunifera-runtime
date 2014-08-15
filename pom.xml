@@ -14,14 +14,14 @@
 
 	<parent>
 		<groupId>org.lunifera.releng.maven</groupId>
-		<artifactId>org.lunifera.releng.maven.parent.tycho.aggregator</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<artifactId>lunifera-releng-maven-parent-tycho</artifactId>
+		<version>0.10.1-SNAPSHOT</version>
 		<relativePath />
 	</parent>
 
 	<groupId>org.lunifera.runtime</groupId>
 	<artifactId>org.lunifera.runtime.aggregator</artifactId>
-	<version>0.7.1-SNAPSHOT</version>
+	<version>0.7.3-SNAPSHOT</version>
 
 	<packaging>pom</packaging>
 
@@ -40,7 +40,7 @@
 		<profile>
 			<id>lunifera.build.features</id>
 			<activation>
-				<activeByDefault>false</activeByDefault>
+				<activeByDefault>true</activeByDefault>
 			</activation>
 			<build>
 				<defaultGoal>clean verify</defaultGoal>
