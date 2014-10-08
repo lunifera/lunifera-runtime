@@ -40,7 +40,9 @@
 		<profile>
 			<id>build.p2</id>
 			<activation>
-				<activeByDefault>false</activeByDefault>
+				<property>
+					<name>lunifera.build.p2</name>
+				</property>
 			</activation>
 			<build>
 				<defaultGoal>clean verify</defaultGoal>
