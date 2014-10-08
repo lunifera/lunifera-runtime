@@ -38,21 +38,7 @@
 
 	<profiles>
 		<profile>
-			<id>lunifera.build.features</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<build>
-				<defaultGoal>clean verify</defaultGoal>
-			</build>
-			<modules>
-				<module>org.lunifera.runtime.parent</module>
-				<module>org.lunifera.runtime.common</module>
-				<module>org.lunifera.runtime.feature.common</module>
-			</modules>
-		</profile>
-		<profile>
-			<id>lunifera.build.p2</id>
+			<id>build.p2</id>
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
