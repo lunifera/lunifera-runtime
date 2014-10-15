@@ -11,7 +11,6 @@
 package org.lunifera.runtime.common.annotations;
 
 import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 import java.lang.annotation.Retention;
@@ -22,7 +21,7 @@ import java.lang.annotation.Target;
  * embedded. So UIs do not have to provide search fields for it, but need to
  * inline its fields into a form.
  */
-@Target({ FIELD, METHOD })
+@Target({ FIELD })
 @Retention(RUNTIME)
 public @interface DomainEmbedded {
 

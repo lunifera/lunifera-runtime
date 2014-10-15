@@ -11,7 +11,6 @@
 package org.lunifera.runtime.common.annotations;
 
 import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 import java.lang.annotation.Retention;
@@ -21,7 +20,7 @@ import java.lang.annotation.Target;
  * This annotation marks fields in JPA entities and DTOs, that the content is
  * reference to another Bean. So UIs may provide a search dialog for it.
  */
-@Target({ FIELD, METHOD })
+@Target({ FIELD })
 @Retention(RUNTIME)
 public @interface DomainReference {
 
