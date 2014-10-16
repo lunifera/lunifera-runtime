@@ -46,6 +46,36 @@
 			</activation>
 			<build>
 				<defaultGoal>clean verify</defaultGoal>
+				<plugins>
+					<plugin>
+						<artifactId>maven-clean-plugin</artifactId>
+						<configuration>
+							<filesets>
+								<fileset>
+									<directory>xtend-gen</directory>
+									<includes>
+										<include>**</include>
+									</includes>
+								</fileset>
+							</filesets>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.eclipse.xtend</groupId>
+						<artifactId>xtend-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<goals>
+									<goal>compile</goal>
+									<goal>testCompile</goal>
+								</goals>
+								<configuration>
+									<outputDirectory>xtend-gen</outputDirectory>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
 			</build>
 			<modules>
 				<module>org.lunifera.runtime.p2</module>
