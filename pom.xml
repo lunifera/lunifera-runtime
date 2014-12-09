@@ -15,13 +15,13 @@
 	<parent>
 		<groupId>org.lunifera.releng.maven</groupId>
 		<artifactId>lunifera-releng-maven-parent-tycho</artifactId>
-		<version>0.10.1-SNAPSHOT</version>
+		<version>0.12.3-SNAPSHOT</version>
 		<relativePath />
 	</parent>
 
 	<groupId>org.lunifera.runtime</groupId>
 	<artifactId>org.lunifera.runtime.aggregator</artifactId>
-	<version>0.7.4</version>
+	<version>0.8.0</version>
 
 	<packaging>pom</packaging>
 
@@ -38,26 +38,44 @@
 
 	<profiles>
 		<profile>
-			<id>lunifera.build.features</id>
+			<id>build.p2</id>
 			<activation>
-				<activeByDefault>true</activeByDefault>
+				<property>
+					<name>lunifera.build.p2</name>
+				</property>
 			</activation>
 			<build>
 				<defaultGoal>clean verify</defaultGoal>
-			</build>
-			<modules>
-				<module>org.lunifera.runtime.parent</module>
-				<module>org.lunifera.runtime.common</module>
-				<module>org.lunifera.runtime.feature.common</module>
-			</modules>
-		</profile>
-		<profile>
-			<id>lunifera.build.p2</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<build>
-				<defaultGoal>clean verify</defaultGoal>
+				<plugins>
+					<plugin>
+						<artifactId>maven-clean-plugin</artifactId>
+						<configuration>
+							<filesets>
+								<fileset>
+									<directory>xtend-gen</directory>
+									<includes>
+										<include>**</include>
+									</includes>
+								</fileset>
+							</filesets>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.eclipse.xtend</groupId>
+						<artifactId>xtend-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<goals>
+									<goal>compile</goal>
+									<goal>testCompile</goal>
+								</goals>
+								<configuration>
+									<outputDirectory>xtend-gen</outputDirectory>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
 			</build>
 			<modules>
 				<module>org.lunifera.runtime.p2</module>

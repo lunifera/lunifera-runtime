@@ -14,11 +14,12 @@
 	<parent>
 		<groupId>org.lunifera.releng.maven</groupId>
 		<artifactId>lunifera-releng-maven-parent-tycho</artifactId>
-		<version>0.10.1-SNAPSHOT</version>
+		<version>0.12.3-SNAPSHOT</version>
 		<relativePath />
 	</parent>
 
 	<artifactId>org.lunifera.runtime.p2</artifactId>
+	<version>0.8.0</version>
 	<packaging>eclipse-repository</packaging>
 
 	<properties>
@@ -62,7 +63,7 @@
 
 	<profiles>
 		<profile>
-			<id>lunifera.build.p2</id>
+			<id>build.p2</id>
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
@@ -122,17 +123,5 @@
 			</build>
 		</profile>
 	</profiles>
-
-<!-- 	<dependencyManagement> -->
-<!-- 		<dependencies> -->
-<!-- 			<dependency> -->
-<!-- 				<groupId>org.lunifera.runtime</groupId> -->
-<!-- 				<artifactId>org.lunifera.runtime.parent</artifactId> -->
-<!-- 				<version>0.0.1-SNAPSHOT</version> -->
-<!-- 				<type>pom</type> -->
-<!-- 				<scope>import</scope> -->
-<!-- 			</dependency> -->
-<!-- 		</dependencies> -->
-<!-- 	</dependencyManagement> -->
-<version>0.7.4</version>
+	<groupId>org.lunifera.runtime</groupId>
 </project>
