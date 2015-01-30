@@ -6,5 +6,8 @@
    <feature id="org.lunifera.runtime.feature.common.source" version="0.0.0">
       <category name="lunifera-runtime-components"/>
    </feature>
+   <feature url="features/org.lunifera.runtime.feature.configuration.manager_0.8.1.qualifier.jar" id="org.lunifera.runtime.feature.configuration.manager" version="0.8.1.qualifier">
+      <category name="lunifera-runtime-components"/>
+   </feature>
    <category-def name="lunifera-runtime-components" label="Lunifera Runtime Components"/>
 </site>
