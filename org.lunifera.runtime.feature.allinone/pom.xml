@@ -37,6 +37,38 @@
 				</executions>
 				<configuration>
 					<labelSuffix> (source)</labelSuffix>
+					<excludes>
+						<plugin id="com.google.gwt.thirdparty.guava"/>
+						<plugin id="com.google.gwt.thirdparty.streamhtmlparser"/>
+						<plugin id="com.vaadin.client"/>
+						<plugin id="com.vaadin.client-compiled"/>
+						<plugin id="com.vaadin.external.atmosphere.runtime"/>
+						<plugin id="com.vaadin.external.org.slf4j"/>
+						<plugin id="com.vaadin.external.org.slf4j"/> <!-- yes, we need to exclude that twice. Don't ask me why. -->
+						<plugin id="com.vaadin.push"/>
+						<plugin id="com.vaadin.server"/>
+						<plugin id="com.vaadin.shared"/>
+						<plugin id="com.vaadin.themes"/>
+						<plugin id="javax.persistence"/>
+						<plugin id="javax.xml"/>
+				 		<plugin id="org.apache.commons.collections"/>
+				 		<plugin id="org.apache.felix.gogo.command"/>
+				 		<plugin id="org.apache.felix.gogo.runtime"/>
+				 		<plugin id="org.apache.felix.gogo.shell"/>
+				 		<plugin id="org.apache.xerces"/>
+				 		<plugin id="org.apache.xml.resolver"/>
+				 		<plugin id="org.apache.xml.serializer"/>
+				 		<plugin id="org.eclipse.gemini.dbaccess.derby"/>
+				 		<plugin id="org.eclipse.gemini.dbaccess.util"/>
+				 		<plugin id="org.eclipse.gemini.jpa"/>
+				 		<plugin id="org.eclipse.persistence.asm"/>
+				 		<plugin id="org.eclipse.persistence.core"/>
+				 		<plugin id="org.eclipse.persistence.jpa"/>
+				 		<plugin id="org.eclipse.persistence.jpa.jpql"/>
+				 		<plugin id="org.json"/>
+				 		<plugin id="org.lunifera.ecview.vaadin.servlet.mobile"/>
+				 		<plugin id="org.w3c.flute"/>
+				 	</excludes>
 				</configuration>
 			</plugin>
 			<plugin>

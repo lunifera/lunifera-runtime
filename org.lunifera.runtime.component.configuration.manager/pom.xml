@@ -20,6 +20,9 @@
 
 	<artifactId>org.lunifera.runtime.component.configuration.manager</artifactId>
 	<packaging>eclipse-plugin</packaging>
+	<properties>
+		<sonar.sources>src/main</sonar.sources>
+	</properties>
 
 	<build>
 		<plugins>
