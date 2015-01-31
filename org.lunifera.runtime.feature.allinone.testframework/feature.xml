@@ -17,24 +17,19 @@
       %license
    </license>
 
- 
-   <plugin id="org.lunifera.runtime.feature.allinone"
+   <includes
+         id="org.lunifera.runtime.feature.allinone"
+         version="0.0.0"/>
+
+   <includes
+         id="org.lunifera.dependencies.feature.assert-utilities"
+         version="0.0.0"/>
+
+  
+   <plugin
+         id="org.junit"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-
-   <plugin id="org.junit"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin id="org.lunifera.dependencies.feature.assert-utilities"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-
 </feature>
