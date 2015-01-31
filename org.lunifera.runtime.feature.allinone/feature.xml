@@ -659,7 +659,7 @@
          version="0.0.0"
          unpack="false"/>
 
-   <plugin id="org.eclipse.xtext.logging" fragment="true"
+   <plugin id="org.eclipse.xtext.logging"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -686,7 +686,7 @@
    <plugin id="org.json"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="0.0.20080701"
          unpack="false"/>
 
    <plugin id="org.jsoup"
@@ -953,6 +953,12 @@
          version="0.0.0"
          unpack="false"/>
 
+   <plugin id="org.lunifera.vaaclipse.app"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
    <plugin id="org.lunifera.vaaclipse.ui.preferences.addon"
          download-size="0"
          install-size="0"
@@ -1026,12 +1032,6 @@
          unpack="false"/>
 
    <plugin id="org.semanticsoft.vaaclipse.api"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin id="org.semanticsoft.vaaclipse.app"
          download-size="0"
          install-size="0"
          version="0.0.0"
