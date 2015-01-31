@@ -38,6 +38,7 @@
 				<configuration>
 					<labelSuffix> (source)</labelSuffix>
 					<excludes>
+						<feature id="org.lunifera.dependencies.feature.assert-utilities" />
 					</excludes>
 				</configuration>
 			</plugin>
