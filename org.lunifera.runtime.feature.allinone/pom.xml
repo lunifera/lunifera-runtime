@@ -1,0 +1,99 @@
+<!--#======================================================================= -->
+<!--# Copyright (c) 2012, 2013 Committers of lunifera.org - Lunifera.org. -->
+<!--# All rights reserved. This program and the accompanying materials -->
+<!--# are made available under the terms of the Eclipse Public License v1.0 -->
+<!--# which accompanies this distribution, and is available at -->
+<!--# http://www.eclipse.org/legal/epl-v10.html -->
+<!--# -->
+<!--# Contributors: -->
+<!--# Cristiano Gavião - initial API and implementation -->
+<!--#======================================================================= -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.lunifera.runtime</groupId>
+		<artifactId>org.lunifera.runtime.parent</artifactId>
+		<version>0.8.1-SNAPSHOT</version>
+		<relativePath>../org.lunifera.runtime.parent/pom.xml</relativePath>
+	</parent>
+
+	<artifactId>org.lunifera.runtime.feature.allinone</artifactId>
+	<packaging>eclipse-feature</packaging>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho.extras</groupId>
+				<artifactId>tycho-source-feature-plugin</artifactId>
+				<version>${tychoExtrasVersion}</version>
+				<executions>
+					<execution>
+						<id>source-feature</id>
+						<phase>package</phase>
+						<goals>
+							<goal>source-feature</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<labelSuffix> (source)</labelSuffix>
+					<excludes>
+						<plugin id="com.google.gwt.thirdparty.guava"/>
+						<plugin id="com.google.gwt.thirdparty.streamhtmlparser"/>
+						<plugin id="com.vaadin.client"/>
+						<plugin id="com.vaadin.client-compiled"/>
+						<plugin id="com.vaadin.external.atmosphere.runtime"/>
+						<plugin id="com.vaadin.external.org.slf4j"/>
+						<plugin id="com.vaadin.external.org.slf4j"/> <!-- yes, we need to exclude that twice. Don't ask me why. -->
+						<plugin id="com.vaadin.push"/>
+						<plugin id="com.vaadin.server"/>
+						<plugin id="com.vaadin.shared"/>
+						<plugin id="com.vaadin.themes"/>
+						<plugin id="javax.persistence"/>
+						<plugin id="javax.xml"/>
+				 		<plugin id="org.apache.commons.collections"/>
+				 		<plugin id="org.apache.felix.gogo.command"/>
+				 		<plugin id="org.apache.felix.gogo.runtime"/>
+				 		<plugin id="org.apache.felix.gogo.shell"/>
+				 		<plugin id="org.apache.xerces"/>
+				 		<plugin id="org.apache.xml.resolver"/>
+				 		<plugin id="org.apache.xml.serializer"/>
+				 		<plugin id="org.eclipse.gemini.dbaccess.derby"/>
+				 		<plugin id="org.eclipse.gemini.dbaccess.util"/>
+				 		<plugin id="org.eclipse.gemini.jpa"/>
+				 		<plugin id="org.eclipse.persistence.asm"/>
+				 		<plugin id="org.eclipse.persistence.core"/>
+				 		<plugin id="org.eclipse.persistence.jpa"/>
+				 		<plugin id="org.eclipse.persistence.jpa.jpql"/>
+				 		<plugin id="org.json"/>
+				 		<plugin id="org.lunifera.ecview.vaadin.servlet.mobile"/>
+				 		<plugin id="org.w3c.flute"/>
+				 	</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<!-- workaround while bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=398250 
+					is not fixed -->
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-p2-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<id>attached-p2-metadata</id>
+						<phase>package</phase>
+						<goals>
+							<goal>p2-metadata</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>org.eclipse.gemini</groupId>
+			<artifactId>org.eclipse.gemini.dbaccess.derby</artifactId>
+			<version>1.1.0.RELEASE</version>
+		</dependency>
+	</dependencies>
+</project>

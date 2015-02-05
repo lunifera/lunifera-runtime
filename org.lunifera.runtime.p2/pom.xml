@@ -14,10 +14,11 @@
 	<parent>
 		<groupId>org.lunifera.releng.maven</groupId>
 		<artifactId>lunifera-releng-maven-parent-tycho</artifactId>
-		<version>0.12.3-SNAPSHOT</version>
+		<version>0.12.5-SNAPSHOT</version>
 		<relativePath />
 	</parent>
 
+	<groupId>org.lunifera.runtime</groupId>
 	<artifactId>org.lunifera.runtime.p2</artifactId>
 	<version>0.8.1-SNAPSHOT</version>
 	<packaging>eclipse-repository</packaging>
@@ -123,5 +124,13 @@
 			</build>
 		</profile>
 	</profiles>
-	<groupId>org.lunifera.runtime</groupId>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.eclipse.gemini</groupId>
+			<artifactId>org.eclipse.gemini.dbaccess.derby</artifactId>
+			<version>1.1.0.RELEASE</version>
+		</dependency>
+	</dependencies>
+
 </project>

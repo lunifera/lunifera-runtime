@@ -15,7 +15,7 @@
 	<parent>
 		<groupId>org.lunifera.releng.maven</groupId>
 		<artifactId>lunifera-releng-maven-parent-tycho</artifactId>
-		<version>0.12.3-SNAPSHOT</version>
+		<version>0.12.5-SNAPSHOT</version>
 		<relativePath />
 	</parent>
 
@@ -35,6 +35,10 @@
 		<module>org.lunifera.runtime.common</module>
 		<module>org.lunifera.runtime.event</module>
 		<module>org.lunifera.runtime.feature.common</module>
+		<module>org.lunifera.runtime.feature.allinone</module>
+		<module>org.lunifera.runtime.feature.allinone.testframework</module>
+		<module>org.lunifera.runtime.feature.configuration.manager</module>
+		<module>org.lunifera.runtime.component.configuration.manager</module>
 	</modules>
 
 	<profiles>
