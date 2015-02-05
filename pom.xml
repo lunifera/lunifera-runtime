@@ -33,6 +33,7 @@
 	<modules>
 		<module>org.lunifera.runtime.parent</module>
 		<module>org.lunifera.runtime.common</module>
+		<module>org.lunifera.runtime.event</module>
 		<module>org.lunifera.runtime.feature.common</module>
 	</modules>
 
