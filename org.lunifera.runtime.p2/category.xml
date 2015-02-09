@@ -9,10 +9,16 @@
    <feature id="org.lunifera.runtime.feature.configuration.manager" >
       <category name="lunifera-runtime-components"/>
    </feature>
-   <feature id="org.lunifera.runtime.feature.allinone">
+   <feature id="org.lunifera.runtime.feature.configuration.manager.source" >
       <category name="lunifera-runtime-components"/>
    </feature>
-   <feature id="org.lunifera.runtime.feature.configuration.manager.source" >
+   <feature id="org.lunifera.runtime.feature.e4eventmanager">
+      <category name="lunifera-runtime-components"/>
+   </feature>
+   <feature id="org.lunifera.runtime.feature.e4eventmanager.source">
+      <category name="lunifera-runtime-components"/>
+   </feature>
+   <feature id="org.lunifera.runtime.feature.allinone">
       <category name="lunifera-runtime-components"/>
    </feature>
    <feature id="org.lunifera.runtime.feature.allinone.source">
