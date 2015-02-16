@@ -14,7 +14,7 @@
 	<parent>
 		<groupId>org.lunifera.runtime</groupId>
 		<artifactId>org.lunifera.runtime.parent</artifactId>
-		<version>0.9.0</version>
+		<version>0.9.1-SNAPSHOT</version>
 		<relativePath>../org.lunifera.runtime.parent/pom.xml</relativePath>
 	</parent>
 

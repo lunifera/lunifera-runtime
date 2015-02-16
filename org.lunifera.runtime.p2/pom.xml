@@ -14,13 +14,13 @@
 	<parent>
 		<groupId>org.lunifera.releng.maven</groupId>
 		<artifactId>lunifera-releng-maven-parent-tycho</artifactId>
-		<version>0.9.0</version>
+		<version>0.9.1-SNAPSHOT</version>
 		<relativePath />
 	</parent>
 
 	<groupId>org.lunifera.runtime</groupId>
 	<artifactId>org.lunifera.runtime.p2</artifactId>
-	<version>0.9.0</version>
+	<version>0.9.1-SNAPSHOT</version>
 	<packaging>eclipse-repository</packaging>
 
 	<properties>
