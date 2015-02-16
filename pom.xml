@@ -37,7 +37,7 @@
 		<module>org.lunifera.runtime.feature.common</module>
 <!-- 		<module>org.lunifera.runtime.feature.allinone</module> -->
 		<module>org.lunifera.runtime.feature.e4eventmanager</module>
-		<module>org.lunifera.runtime.feature.allinone.testframework</module>
+<!-- 		<module>org.lunifera.runtime.feature.allinone.testframework</module> -->
 		<module>org.lunifera.runtime.feature.configuration.manager</module>
 		<module>org.lunifera.runtime.component.configuration.manager</module>
 	</modules>
