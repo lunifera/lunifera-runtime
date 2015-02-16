@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.lunifera.runtime.component.configuration.manager.test.conf
+Bundle-Version: 0.0.1.qualifier
+Bundle-Vendor: %providerName
+Fragment-Host: org.lunifera.runtime.component.configuration.manager;bundle-version="0.0.1"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
