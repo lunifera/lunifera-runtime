@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.lunifera.runtime.feature.common"
+      id="org.lunifera.runtime.feature.e4eventmanager"
       label="%featureName"
       version="0.9.1.qualifier"
       provider-name="%providerName">
@@ -18,7 +18,7 @@
    </license>
 
    <plugin
-         id="org.lunifera.runtime.common"
+         id="org.lunifera.runtime.event"
          download-size="0"
          install-size="0"
          version="0.0.0"

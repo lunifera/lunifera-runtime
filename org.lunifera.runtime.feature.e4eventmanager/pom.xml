@@ -18,7 +18,7 @@
 		<relativePath>../org.lunifera.runtime.parent/pom.xml</relativePath>
 	</parent>
 
-	<artifactId>org.lunifera.runtime.feature.allinone.testframework</artifactId>
+	<artifactId>org.lunifera.runtime.feature.e4eventmanager</artifactId>
 	<packaging>eclipse-feature</packaging>
 	<build>
 		<plugins>
@@ -37,9 +37,6 @@
 				</executions>
 				<configuration>
 					<labelSuffix> (source)</labelSuffix>
-					<excludes>
-						<feature id="org.lunifera.dependencies.feature.assert-utilities" />
-					</excludes>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -60,22 +57,4 @@
 			</plugin>
 		</plugins>
 	</build>
-	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.11</version>
-		</dependency>
-		<dependency>
-			<groupId>org.lunifera.runtime</groupId>
-			<artifactId>org.lunifera.runtime.feature.allinone</artifactId>
-			<version>0.8.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.lunifera.dependencies</groupId>
-			<artifactId>org.lunifera.dependencies.feature.assert-utilities</artifactId>
-			<version>1.2.2.2</version>
-		</dependency>
-
-	</dependencies>
 </project>
