@@ -20,7 +20,7 @@
 
 	<groupId>org.lunifera.runtime</groupId>
 	<artifactId>org.lunifera.runtime.p2</artifactId>
-	<version>0.9.1-SNAPSHOT</version>
+	<version>0.8.1-SNAPSHOT</version>
 	<packaging>eclipse-repository</packaging>
 
 	<properties>

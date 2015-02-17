@@ -2,7 +2,7 @@
 <feature
       id="org.lunifera.runtime.feature.allinone.testframework"
       label="%featureName"
-      version="0.9.1.qualifier"
+      version="0.8.1.qualifier"
       provider-name="%providerName">
 
    <description>
@@ -19,11 +19,11 @@
 
    <includes
          id="org.lunifera.runtime.feature.allinone"
-         version="0.9.1.qualifier"/>
+         version="0.8.1.qualifier"/>
 
    <includes
          id="org.lunifera.dependencies.feature.assert-utilities"
-         version="0.9.1.qualifier"/>
+         version="0.8.1.qualifier"/>
   
    <plugin
          id="org.junit"
