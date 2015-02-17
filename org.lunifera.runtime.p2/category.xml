@@ -18,6 +18,12 @@
    <feature id="org.lunifera.runtime.feature.e4eventmanager.source">
       <category name="lunifera-runtime-components"/>
    </feature>
+   <feature id="org.lunifera.runtime.feature.resolverhooks">
+      <category name="lunifera-runtime-components"/>
+   </feature>
+   <feature id="org.lunifera.runtime.feature.resolverhooks.source">
+      <category name="lunifera-runtime-components"/>
+   </feature>
    
    <category-def name="lunifera-runtime-components" label="Lunifera Runtime Components"/>
 </site>
