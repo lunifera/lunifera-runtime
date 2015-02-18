@@ -1,2 +1,5 @@
 instructions.install = \
 addJvmArg(jvmArg:-Dosgi.framework.extensions=org.lunifera.runtime.systemextension);
+
+instructions.install.import= \
+org.eclipse.equinox.p2.touchpoint.eclipse.addJvmArg;
