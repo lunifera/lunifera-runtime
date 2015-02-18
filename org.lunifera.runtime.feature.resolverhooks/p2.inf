@@ -1,0 +1,2 @@
+instructions.install = \
+addJvmArg(jvmArg:-Dosgi.framework.extensions=org.lunifera.runtime.systemextension);
