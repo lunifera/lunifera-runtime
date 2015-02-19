@@ -18,16 +18,10 @@
    <feature id="org.lunifera.runtime.feature.e4eventmanager.source">
       <category name="lunifera-runtime-components"/>
    </feature>
-   <feature id="org.lunifera.runtime.feature.allinone">
+   <feature id="org.lunifera.runtime.feature.resolverhooks">
       <category name="lunifera-runtime-components"/>
    </feature>
-   <feature id="org.lunifera.runtime.feature.allinone.source">
-      <category name="lunifera-runtime-components"/>
-   </feature>
-   <feature id="org.lunifera.runtime.feature.allinone.testframework">
-      <category name="lunifera-runtime-components"/>
-   </feature>
-   <feature id="org.lunifera.runtime.feature.allinone.testframework.source">
+   <feature id="org.lunifera.runtime.feature.resolverhooks.source">
       <category name="lunifera-runtime-components"/>
    </feature>
    
