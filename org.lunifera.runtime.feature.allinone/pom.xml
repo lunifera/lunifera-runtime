@@ -61,6 +61,7 @@
 				 		<plugin id="org.eclipse.gemini.dbaccess.derby"/>
 				 		<plugin id="org.eclipse.gemini.dbaccess.util"/>
 				 		<plugin id="org.eclipse.gemini.jpa"/>
+				 		<plugin id="org.eclipse.jetty.websocket"/>
 				 		<plugin id="org.eclipse.persistence.asm"/>
 				 		<plugin id="org.eclipse.persistence.core"/>
 				 		<plugin id="org.eclipse.persistence.jpa"/>
