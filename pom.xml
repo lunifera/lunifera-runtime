@@ -21,7 +21,7 @@
 
 	<groupId>org.lunifera.runtime</groupId>
 	<artifactId>org.lunifera.runtime.aggregator</artifactId>
-	<version>0.9.1-SNAPSHOT</version>
+	<version>0.8.1-SNAPSHOT</version>
 
 	<packaging>pom</packaging>
 
@@ -34,11 +34,13 @@
 		<module>org.lunifera.runtime.parent</module>
 		<module>org.lunifera.runtime.common</module>
 		<module>org.lunifera.runtime.event</module>
+		<module>org.lunifera.runtime.systemextension</module>
 		<module>org.lunifera.runtime.feature.common</module>
-		<module>org.lunifera.runtime.feature.allinone</module>
+<!-- 		<module>org.lunifera.runtime.feature.allinone</module> -->
 		<module>org.lunifera.runtime.feature.e4eventmanager</module>
-		<module>org.lunifera.runtime.feature.allinone.testframework</module>
+<!-- 		<module>org.lunifera.runtime.feature.allinone.testframework</module> -->
 		<module>org.lunifera.runtime.feature.configuration.manager</module>
+		<module>org.lunifera.runtime.feature.resolverhooks</module>
 		<module>org.lunifera.runtime.component.configuration.manager</module>
 	</modules>
 

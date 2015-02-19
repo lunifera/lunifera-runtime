@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.lunifera.runtime.feature.allinone.testframework"
+      id="org.lunifera.runtime.feature.resolverhooks"
       label="%featureName"
       version="0.8.1.qualifier"
       provider-name="%providerName">
@@ -17,18 +17,11 @@
       %license
    </license>
 
-   <includes
-         id="org.lunifera.runtime.feature.allinone"
-         version="0.8.1.qualifier"/>
-
-   <includes
-         id="org.lunifera.dependencies.feature.assert-utilities"
-         version="0.8.1.qualifier"/>
-  
    <plugin
-         id="org.junit"
+         id="org.lunifera.runtime.systemextension"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+
 </feature>

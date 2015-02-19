@@ -18,33 +18,39 @@
 		<relativePath>../org.lunifera.runtime.parent/pom.xml</relativePath>
 	</parent>
 
-	<artifactId>org.lunifera.runtime.component.configuration.manager</artifactId>
-	<packaging>eclipse-plugin</packaging>
-	<properties>
-		<sonar.sources>src/main</sonar.sources>
-	</properties>
-
+	<artifactId>org.lunifera.runtime.feature.resolverhooks</artifactId>
+	<packaging>eclipse-feature</packaging>
 	<build>
 		<plugins>
 			<plugin>
-				<artifactId>maven-antrun-plugin</artifactId>
+				<groupId>org.eclipse.tycho.extras</groupId>
+				<artifactId>tycho-source-feature-plugin</artifactId>
+				<version>${tychoExtrasVersion}</version>
 				<executions>
 					<execution>
-						<phase>prepare-package</phase>
-						<configuration>
-							<!-- <quiet>true</quiet> -->
-							<target name="copy.repo.to.dir">
-								<echo message="Deployment Dir ${lunifera.deployment.root.dir}" />
-								<echo message="Platform ${lunifera.build.eclipse.platform.name}" />
-								<echo message="Type ${lunifera.build.type}" />
-								<echo message="Repo Name ${lunifera.deployment.p2.name}" />
-								<echo message="Repo Keep Old ${lunifera.deployment.p2.keep.old}" />
-								<echo message="Repo Version ${lunifera.deployment.artifact.version}" />
-								<echo message="Platform URL ${lunifera.build.eclipse.platform.p2.url}" />
-							</target>
-						</configuration>
+						<id>source-feature</id>
+						<phase>package</phase>
 						<goals>
-							<goal>run</goal>
+							<goal>source-feature</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<labelSuffix> (source)</labelSuffix>
+				</configuration>
+			</plugin>
+			<plugin>
+				<!-- workaround while bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=398250 
+					is not fixed -->
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-p2-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<id>attached-p2-metadata</id>
+						<phase>package</phase>
+						<goals>
+							<goal>p2-metadata</goal>
 						</goals>
 					</execution>
 				</executions>
