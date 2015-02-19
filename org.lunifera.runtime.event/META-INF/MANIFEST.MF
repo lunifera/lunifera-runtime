@@ -4,7 +4,7 @@ Bundle-Name: org.lunifera.runtime.event
 Bundle-Vendor: Lunifera GmbH
 Bundle-Localization: OSGI-INF/l10n/bundle
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Bundle-SymbolicName: org.lunifera.runtime.event;singleton:=true
+Bundle-SymbolicName: org.lunifera.runtime.event
 Bundle-Version: 0.8.1.qualifier
 Import-Package: org.osgi.framework;version="1.8.0",
  org.osgi.service.component;version="1.2.2",
@@ -13,5 +13,5 @@ Import-Package: org.osgi.framework;version="1.8.0",
  org.osgi.service.prefs,
  org.slf4j;version="1.7.2"
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.lunifera.runtime.common;bundle-version="0.8.1"
 Service-Component: OSGI-INF/org.lunifera.runtime.event.EventBroker.xml
+Require-Bundle: org.lunifera.runtime.common;bundle-version="0.8.1"
