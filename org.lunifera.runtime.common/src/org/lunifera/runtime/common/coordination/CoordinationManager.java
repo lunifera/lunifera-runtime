@@ -3,7 +3,7 @@ package org.lunifera.runtime.common.coordination;
 import java.util.Map;
 import java.util.UUID;
 
-import org.lunifera.runtime.common.environment.SharedEnvironmentUnitOfWork;
+import org.lunifera.runtime.common.state.SharedStateUnitOfWork;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.service.coordinator.Coordination;
 import org.osgi.service.coordinator.Coordinator;
@@ -14,11 +14,12 @@ import org.slf4j.LoggerFactory;
 /**
  * Helper methods for OSGi coordination.
  */
-public class CoordinationUtil {
+public class CoordinationManager {
 	private static final Logger LOGGER = LoggerFactory
-			.getLogger(CoordinationUtil.class);
+			.getLogger(CoordinationManager.class);
+	private ServiceTracker<Coordinator, Coordinator> tracker;
 
-	private CoordinationUtil() {
+	public CoordinationManager() {
 
 	}
 
@@ -32,7 +33,7 @@ public class CoordinationUtil {
 		ServiceTracker<Coordinator, Coordinator> tracker = null;
 		try {
 			tracker = new ServiceTracker<Coordinator, Coordinator>(
-					FrameworkUtil.getBundle(CoordinationUtil.class)
+					FrameworkUtil.getBundle(CoordinationManager.class)
 							.getBundleContext(), Coordinator.class, null);
 			tracker.open();
 			Coordinator coordinator = tracker.waitForService(10);
@@ -52,22 +53,27 @@ public class CoordinationUtil {
 
 	/**
 	 * Returns a new implicit coordination and makes it the current
-	 * coordination. Returns <code>null</code> if no {@link Coordinator} is available.
+	 * coordination. Returns <code>null</code> if no {@link Coordinator} is
+	 * available.
+	 * <p>
+	 * <b>Attention:</b> Do not forget to release the manager! This will release
+	 * the CoordinatorService. Pending coordinations will be ended abnormally in
+	 * case that no other manager will hold a reference to the
+	 * CoordinationService.
 	 * 
 	 * @return
 	 */
-	public static Coordination createCurrentCoordination(
+	public Coordination createCurrentCoordination(
 			Map<Class<?>, Object> properties) {
-		ServiceTracker<Coordinator, Coordinator> tracker = null;
 		try {
 			tracker = new ServiceTracker<Coordinator, Coordinator>(
-					FrameworkUtil.getBundle(SharedEnvironmentUnitOfWork.class)
+					FrameworkUtil.getBundle(SharedStateUnitOfWork.class)
 							.getBundleContext(), Coordinator.class, null);
 			tracker.open();
-			Coordinator coordinator = tracker.waitForService(500);
+			Coordinator coordinator = tracker.waitForService(10);
 			if (coordinator != null) {
 				Coordination peek = coordinator.begin(UUID.randomUUID()
-						.toString(), 100);
+						.toString(), 0);
 				peek.getVariables().putAll(properties);
 				return peek;
 			} else {
@@ -75,11 +81,34 @@ public class CoordinationUtil {
 			}
 		} catch (InterruptedException e) {
 		} finally {
-			if (tracker != null) {
-				tracker.close();
-			}
 		}
 
+		return null;
+	}
+
+	/**
+	 * Releases the {@link Coordinator} service.
+	 */
+	public void release() {
+		if (tracker != null) {
+			tracker.close();
+			tracker = null;
+		}
+	}
+
+	/**
+	 * Returns the property with the given key from the current
+	 * "implicit Coordination". Or <code>null</code> if property is not
+	 * available.
+	 * 
+	 * @param key
+	 * @return
+	 */
+	public static Object getPropertyFromCurrentCoordination(Class<?> key) {
+		Coordination current = getCurrentCoordination();
+		if (current != null) {
+			return current.getVariables().get(key);
+		}
 		return null;
 	}
 }
