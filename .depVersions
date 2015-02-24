@@ -1,2 +1,6 @@
-org.eclipse.xtext;min=2.7.3;max=2.7.3
-org.lunifera.dsl;min=0.8.3;max=0.9.0
+org.eclipse.xtend;min=2.7.3;max=2.8.0
+org.eclipse.xtext;min=2.7.3;max=2.8.0
+org.semanticsoft;min=2.7.3;max=3.0.0
+org.lunifera.dsl;min=0.9.0;max=0.10.0
+org.lunifera;min=0.9.0;max=0.10.0
+com.google.guava;min=10.0.0;max=19.0.0

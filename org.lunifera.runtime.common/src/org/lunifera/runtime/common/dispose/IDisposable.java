@@ -15,6 +15,8 @@ package org.lunifera.runtime.common.dispose;
  * for further use and internal references are prepared for garbage collection.<br>
  * Object that have been disposed once cannot be used anymore. The creation of a
  * new object is required.
+ * <p>
+ * No implement by clients.
  */
 public interface IDisposable {
 
@@ -58,7 +60,7 @@ public interface IDisposable {
 	 *            Listener to be removed
 	 */
 	void removeDisposeListener(IDisposable.Listener listener);
-
+	
 	/**
 	 * A public helper util that can be used to check the dispose state of an
 	 * element.

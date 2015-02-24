@@ -25,6 +25,5 @@
       <category name="lunifera-runtime-components"/>
    </feature>
    
-   
    <category-def name="lunifera-runtime-components" label="Lunifera Runtime Components"/>
 </site>
