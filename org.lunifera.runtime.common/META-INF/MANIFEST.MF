@@ -4,17 +4,17 @@ Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
 Bundle-Localization: OSGI-INF/l10n/bundle
 Bundle-SymbolicName: org.lunifera.runtime.common
-Bundle-Version: 0.8.1.qualifier
+Bundle-Version: 0.9.1.qualifier
 Bundle-ActivationPolicy: lazy
-Export-Package: org.lunifera.runtime.common.annotations;version="0.8.1",
+Export-Package: org.lunifera.runtime.common.annotations;version="0.9.1",
  org.lunifera.runtime.common.coordination,
- org.lunifera.runtime.common.dispose;version="0.8.1",
- org.lunifera.runtime.common.event;version="0.8.1",
+ org.lunifera.runtime.common.dispose;version="0.9.1",
+ org.lunifera.runtime.common.event;version="0.9.1",
  org.lunifera.runtime.common.hash,
- org.lunifera.runtime.common.metric;version="0.8.1",
+ org.lunifera.runtime.common.metric;version="0.9.1",
  org.lunifera.runtime.common.state,
  org.lunifera.runtime.common.state.impl;x-internal:=true,
- org.lunifera.runtime.common.user;version="0.8.1"
+ org.lunifera.runtime.common.user;version="0.9.1"
 Import-Package: org.osgi.framework;version="1.8.0",
  org.osgi.service.component;version="1.2.2",
  org.osgi.service.component.annotations;version="1.2.0",

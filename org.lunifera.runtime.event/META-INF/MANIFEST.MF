@@ -4,7 +4,7 @@ Bundle-Name: org.lunifera.runtime.event
 Bundle-Vendor: Lunifera GmbH
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-SymbolicName: org.lunifera.runtime.event
-Bundle-Version: 0.8.1.qualifier
+Bundle-Version: 0.9.1.qualifier
 Import-Package: org.osgi.framework;version="1.8.0",
  org.osgi.service.component;version="1.2.2",
  org.osgi.service.component.annotations;version="1.2.0",

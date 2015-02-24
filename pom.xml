@@ -21,7 +21,7 @@
 
 	<groupId>org.lunifera.runtime</groupId>
 	<artifactId>org.lunifera.runtime.aggregator</artifactId>
-	<version>0.8.1-SNAPSHOT</version>
+	<version>0.9.1-SNAPSHOT</version>
 
 	<packaging>pom</packaging>
 
