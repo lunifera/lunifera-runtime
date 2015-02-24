@@ -12,11 +12,10 @@ package org.lunifera.runtime.common.state.impl;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 
-import org.apache.commons.beanutils.MethodUtils;
-import org.lunifera.runtime.common.annotations.Dispose;
+import org.apache.commons.lang.reflect.MethodUtils;
+import org.lunifera.runtime.common.annotations.DtoUtils;
 import org.lunifera.runtime.common.hash.HashUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,8 +72,7 @@ public class GlobalDataState extends DataState implements
 		Object object = event.getSource();
 		Class<?> objClass = object.getClass();
 		try {
-			Field field = findField(objClass, event.getPropertyName());
-			if (field != null && field.getAnnotation(Dispose.class) != null) {
+			if (DtoUtils.isDisposeField(objClass, event.getPropertyName())) {
 				handleDispose(event);
 				return;
 			}
@@ -83,21 +81,6 @@ public class GlobalDataState extends DataState implements
 		}
 
 		handleDirty(event);
-	}
-
-	protected Field findField(Class<?> clazz, String name) {
-		try {
-			Field field = clazz.getDeclaredField(name);
-			return field;
-		} catch (NoSuchFieldException e) {
-			Class<?> superClass = clazz.getSuperclass();
-			if (superClass != null) {
-				return findField(superClass, name);
-			}
-		} catch (SecurityException e) {
-			LOGGER.error("{}", e);
-		}
-		return null;
 	}
 
 	/**

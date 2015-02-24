@@ -26,4 +26,4 @@ Import-Package: org.osgi.framework;version="1.8.0",
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Service-Component: OSGI-INF/*.xml
 Require-Bundle: com.google.guava,
- org.apache.commons.beanutils;bundle-version="1.8.0"
+ org.apache.commons.lang;bundle-version="2.6.0"
