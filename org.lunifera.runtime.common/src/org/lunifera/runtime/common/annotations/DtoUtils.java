@@ -10,6 +10,10 @@
  */
 package org.lunifera.runtime.common.annotations;
 
+import java.beans.BeanInfo;
+import java.beans.IntrospectionException;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -40,6 +44,39 @@ public class DtoUtils {
 	}
 
 	/**
+	 * Returns the dispose field. Field annotated with {@link Dirty}.
+	 * 
+	 * @param clazz
+	 * @return
+	 */
+	public static Field getDirtyField(Class<?> clazz) {
+		Info info = getInfo(clazz);
+		return info.getDirtyField();
+	}
+
+	/**
+	 * Returns the dispose field. Field annotated with {@link Dirty}.
+	 * 
+	 * @param clazz
+	 * @return
+	 */
+	public static Method getDirtyGetter(Class<?> clazz) {
+		Info info = getInfo(clazz);
+		return info.getDirtyGetter();
+	}
+
+	/**
+	 * Returns the dispose field. Field annotated with {@link Dirty}.
+	 * 
+	 * @param clazz
+	 * @return
+	 */
+	public static Method getDirtySetter(Class<?> clazz) {
+		Info info = getInfo(clazz);
+		return info.getDirtySetter();
+	}
+
+	/**
 	 * Returns the dispose method. Method annotated with {@link Dispose}.
 	 * 
 	 * @param clazz
@@ -61,6 +98,20 @@ public class DtoUtils {
 		Info info = getInfo(clazz);
 		return info.getDisposeField() != null ? info.getDisposeField()
 				.getName().equals(fieldName) : false;
+	}
+
+	/**
+	 * Returns true, if the given field is a dirty field. Dirty fields indicate
+	 * that the dto is dirty.
+	 * 
+	 * @param clazz
+	 * @param fieldName
+	 * @return
+	 */
+	public static boolean isDirtyField(Class<?> clazz, String fieldName) {
+		Info info = getInfo(clazz);
+		return info.getDirtyField() != null ? info.getDirtyField().getName()
+				.equals(fieldName) : false;
 	}
 
 	/**
@@ -96,6 +147,50 @@ public class DtoUtils {
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * Tries to invoke the setDirty method.
+	 * 
+	 * @param obj
+	 * @return true, if the method could be invoked. False otherwise.
+	 */
+	public static boolean invokeDirtySetter(Object obj, boolean value) {
+		Info info = getInfo(obj.getClass());
+		if (info != null && info.getDirtySetter() != null) {
+			try {
+				info.getDirtySetter().invoke(obj, new Object[] { value });
+			} catch (IllegalAccessException e) {
+				return false;
+			} catch (IllegalArgumentException e) {
+				return false;
+			} catch (InvocationTargetException e) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * Tries to invoke the isDirty method.
+	 * 
+	 * @param obj
+	 * @return true, if the method could be invoked. False otherwise.
+	 * @throws IllegalAccessException
+	 */
+	public static boolean invokeDirtyGetter(Object obj)
+			throws IllegalAccessException {
+		Info info = getInfo(obj.getClass());
+		if (info != null && info.getDirtySetter() != null) {
+			try {
+				return (Boolean) info.getDirtyGetter().invoke(obj,
+						new Object[0]);
+			} catch (IllegalAccessException e) {
+			} catch (IllegalArgumentException e) {
+			} catch (InvocationTargetException e) {
+			}
+		}
+		throw new IllegalAccessException("Not a valid call");
 	}
 
 	/**
@@ -139,6 +234,24 @@ public class DtoUtils {
 			for (Field field : clazz.getDeclaredFields()) {
 				if (field.getAnnotation(Dispose.class) != null) {
 					info.disposeField = field;
+				}
+				if (field.getAnnotation(Dirty.class) != null) {
+					info.dirtyField = field;
+
+					try {
+						BeanInfo beanInfo = Introspector.getBeanInfo(clazz);
+						for (PropertyDescriptor pd : beanInfo
+								.getPropertyDescriptors()) {
+							if (pd.getName().equals(info.dirtyField.getName())) {
+								info.dirtyPropertyDescriptor = pd;
+								break;
+							}
+						}
+					} catch (IntrospectionException e) {
+						LOGGER.error("{}", e);
+					}
+				}
+				if (info.disposeField != null && info.dirtyField != null) {
 					break;
 				}
 			}
@@ -199,9 +312,25 @@ public class DtoUtils {
 
 		private Field disposeField;
 		private Method disposeMethod;
+		private Field dirtyField;
+		public PropertyDescriptor dirtyPropertyDescriptor;
 
 		public Field getDisposeField() {
 			return disposeField;
+		}
+
+		public Field getDirtyField() {
+			return dirtyField;
+		}
+
+		public Method getDirtyGetter() {
+			return dirtyPropertyDescriptor != null ? dirtyPropertyDescriptor
+					.getReadMethod() : null;
+		}
+
+		public Method getDirtySetter() {
+			return dirtyPropertyDescriptor != null ? dirtyPropertyDescriptor
+					.getWriteMethod() : null;
 		}
 
 		public Method getDisposeMethod() {

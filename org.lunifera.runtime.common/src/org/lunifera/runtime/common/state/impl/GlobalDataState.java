@@ -76,6 +76,10 @@ public class GlobalDataState extends DataState implements
 				handleDispose(event);
 				return;
 			}
+			// dirty field not forwarded to handle dirty
+			if (DtoUtils.isDirtyField(objClass, event.getPropertyName())) {
+				return;
+			}
 		} catch (SecurityException ignoreIt) {
 			LOGGER.error("{}", ignoreIt);
 		}
@@ -91,6 +95,9 @@ public class GlobalDataState extends DataState implements
 	protected void handleDirty(PropertyChangeEvent event) {
 		Object object = event.getSource();
 		Class<?> objClass = object.getClass();
+
+		// set the dirty flag to true if available
+		DtoUtils.invokeDirtySetter(object, true);
 
 		sharedStateContext.handleDirty(
 				HashUtil.createObjectWithIdHash(objClass, object), object);
