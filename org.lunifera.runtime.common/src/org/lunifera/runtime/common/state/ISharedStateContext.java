@@ -10,14 +10,16 @@
  */
 package org.lunifera.runtime.common.state;
 
+import org.lunifera.runtime.common.hash.HashUtil;
+
 /**
  * Different participants may share data.
  * <p>
  * For instance an {@link IDataState}. In a business application groups of views
  * may share the same data like beans. And other groups of views will share
  * their own data. A shared environment is an abstraction above this group.
- * Views may share the {@link ISharedStateContext} and will also share their properties
- * and data.
+ * Views may share the {@link ISharedStateContext} and will also share their
+ * properties and data.
  * </p>
  */
 public interface ISharedStateContext {
@@ -76,5 +78,23 @@ public interface ISharedStateContext {
 	 * @return
 	 */
 	IDataState getDirtyAwareGlobalState();
+
+	/**
+	 * Makes the given dto undirty.
+	 * 
+	 * @param key
+	 * @param dto
+	 */
+	void makeUndirty(Object key, Object dto);
+
+	/**
+	 * Adds a new "not persistent" entry. The key will be calculated using the
+	 * {@link HashUtil}.
+	 * <p>
+	 * The object will be put into the dirtyState but not the global state.
+	 * 
+	 * @param newEntry
+	 */
+	void addNewTransient(Object newEntry);
 
 }

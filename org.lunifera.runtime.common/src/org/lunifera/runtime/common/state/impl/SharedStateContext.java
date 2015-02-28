@@ -13,8 +13,10 @@ package org.lunifera.runtime.common.state.impl;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.lunifera.runtime.common.annotations.DtoUtils;
 import org.lunifera.runtime.common.dispose.AbstractDisposable;
 import org.lunifera.runtime.common.dispose.IReferenceCountable;
+import org.lunifera.runtime.common.hash.HashUtil;
 import org.lunifera.runtime.common.state.IDataState;
 import org.lunifera.runtime.common.state.ISharedStateContext;
 
@@ -142,5 +144,22 @@ public class SharedStateContext extends AbstractDisposable implements
 		if (dirtyState != null) {
 			dirtyState.register(key, object);
 		}
+	}
+
+	@Override
+	public void makeUndirty(Object key, Object dto) {
+		getDirtyState().invalidate(key);
+
+		// set the dirty flag if available to false
+		DtoUtils.invokeDirtySetter(dto, false);
+	}
+
+	@Override
+	public void addNewTransient(Object newEntry) {
+		// set the dirty flag if available to false
+		DtoUtils.invokeDirtySetter(newEntry, true);
+		getDirtyState().register(
+				HashUtil.createObjectWithIdHash(newEntry.getClass(), newEntry),
+				newEntry);
 	}
 }

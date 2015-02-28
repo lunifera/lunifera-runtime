@@ -82,7 +82,9 @@ public class DataState extends AbstractDisposable implements IDataState {
 	@Override
 	public void invalidate(Object key) {
 		checkDisposed();
-		cache.invalidate(key);
+		if (cache != null) {
+			cache.invalidate(key);
+		}
 	}
 
 	@Override
