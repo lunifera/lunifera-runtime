@@ -172,6 +172,18 @@ public class DtoUtils {
 	}
 
 	/**
+	 * Tries to invoke the dirty getter. If there is no dirty getter available,
+	 * the method throws an {@link IllegalAccessException}.
+	 * 
+	 * @param obj
+	 * @return
+	 * @throws IllegalAccessException
+	 */
+	public static boolean isDirty(Object obj) throws IllegalAccessException {
+		return invokeDirtyGetter(obj);
+	}
+
+	/**
 	 * Tries to invoke the isDirty method.
 	 * 
 	 * @param obj
