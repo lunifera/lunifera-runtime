@@ -67,6 +67,7 @@
 				 		<plugin id="org.eclipse.persistence.core"/>
 				 		<plugin id="org.eclipse.persistence.jpa"/>
 				 		<plugin id="org.eclipse.persistence.jpa.jpql"/>
+				 		<plugin id="org.eclipse.xtext.xbase"/>
 				 		<plugin id="org.json"/>
 				 		<plugin id="org.lunifera.ecview.vaadin.servlet.mobile"/>
 				 		<plugin id="org.w3c.flute"/>
