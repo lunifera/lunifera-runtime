@@ -58,6 +58,12 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+         
+   <plugin id="com.google.inject.multibindings"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
 
    <plugin id="com.ibm.icu"
          download-size="0"
@@ -431,6 +437,12 @@
          version="0.0.0"
          unpack="false"/>
 
+   <plugin id="org.eclipse.equinox.coordinator"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+         
    <plugin id="org.eclipse.equinox.ds"
          download-size="0"
          install-size="0"
@@ -456,6 +468,12 @@
          unpack="false"/>
 
    <plugin id="org.eclipse.equinox.preferences"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin id="org.eclipse.equinox.region"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -491,7 +509,7 @@
          version="0.0.0"
          unpack="false"/>
 
-   <plugin id="org.eclipse.jdt.core"
+   <plugin id="org.eclipse.gemini.naming"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -653,12 +671,6 @@
          version="0.0.0"
          unpack="false"/>
 
-   <plugin id="org.eclipse.xtext.ecore"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
    <plugin id="org.eclipse.xtext.logging"
          download-size="0"
          install-size="0"
@@ -666,6 +678,12 @@
          unpack="false"/>
 
    <plugin id="org.eclipse.xtext.util"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin id="org.eclipse.xtext.xbase"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -881,6 +899,12 @@
          version="0.0.0"
          unpack="false"/>
 
+   <plugin id="org.lunifera.ecview.xtext.builder.participant.i18n"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
    <plugin id="org.lunifera.mobile.vaadin.ecview.editparts"
          download-size="0"
          install-size="0"
@@ -923,6 +947,12 @@
          version="0.0.0"
          unpack="false"/>
 
+   <plugin id="org.lunifera.runtime.event"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
    <plugin id="org.lunifera.runtime.web.common"
          download-size="0"
          install-size="0"
@@ -948,6 +978,30 @@
          unpack="false"/>
 
    <plugin id="org.lunifera.runtime.web.vaadin.databinding"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin id="org.lunifera.vaaclipse.addons.application"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin id="org.lunifera.vaaclipse.addons.common"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin id="org.lunifera.vaaclipse.addons.common.api"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin id="org.lunifera.vaaclipse.addons.ecview"
          download-size="0"
          install-size="0"
          version="0.0.0"
