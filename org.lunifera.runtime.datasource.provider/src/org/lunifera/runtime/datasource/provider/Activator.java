@@ -1,17 +1,10 @@
-package org.lunifera.datasource;
+package org.lunifera.runtime.datasource.provider;
 
-import java.sql.SQLException;
-import java.util.Hashtable;
-
-import javax.sql.DataSource;
-import javax.sql.XADataSource;
+import java.util.Properties;
 
 import org.apache.derby.jdbc.EmbeddedDriver;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.osgi.framework.InvalidSyntaxException;
-import org.osgi.framework.ServiceReference;
-import org.osgi.service.jdbc.DataSourceFactory;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -27,6 +20,7 @@ public class Activator implements BundleActivator {
 
 	private static BundleContext ctx;
 	private static Activator plugin;
+	private Properties dataSourceProperties;
 
 	/**
 	 * The constructor
@@ -89,39 +83,39 @@ public class Activator implements BundleActivator {
 		return plugin;
 	}
 
-	private synchronized DataSource createDataSource(String jndiDatasource)
-			throws SQLException, InvalidSyntaxException {
-		DataSourceFactory dsf = lookupDsf(DS_DRIVER_NAME);
-		DataSource ds = dsf.createDataSource(dataSourceProperties);
-		Hashtable<String, String> ht = new Hashtable<String, String>();
-		ht.put(OSGI_JNDI_SERVICE_NAME, jndiDatasource);
-		ctx.registerService(DataSource.class, ds, ht);
-		return ds;
-	}
-
-	private synchronized XADataSource createXADataSource(String jndiDatasource)
-			throws SQLException, InvalidSyntaxException {
-		DataSourceFactory dsf = lookupDsf(DS_DRIVER_NAME);
-		XADataSource ds = dsf.createXADataSource(dataSourceProperties);
-		Hashtable<String, String> ht = new Hashtable<String, String>();
-		ht.put(OSGI_JNDI_SERVICE_NAME, "XA" + jndiDatasource);
-		ctx.registerService(XADataSource.class, ds, ht);
-		return ds;
-	}
-
-	private DataSourceFactory lookupDsf(String clientDriverName)
-			throws InvalidSyntaxException {
-		String filter = "(&(" + DataSourceFactory.OSGI_JDBC_DRIVER_CLASS + "="
-				+ clientDriverName + "))";
-		return getDsf(filter);
-	}
-
-	private DataSourceFactory getDsf(String filter)
-			throws InvalidSyntaxException {
-		ServiceReference[] refs = null;
-		refs = ctx.getServiceReferences(DataSourceFactory.class.getName(),
-				filter);
-		return (refs == null) ? null : (DataSourceFactory) ctx
-				.getService(refs[0]);
-	}
+//	private synchronized DataSource createDataSource(String jndiDatasource)
+//			throws SQLException, InvalidSyntaxException {
+//		DataSourceFactory dsf = lookupDsf(DS_DRIVER_NAME);
+//		DataSource ds = dsf.createDataSource(dataSourceProperties);
+//		Hashtable<String, String> ht = new Hashtable<String, String>();
+//		ht.put(OSGI_JNDI_SERVICE_NAME, jndiDatasource);
+//		ctx.registerService(DataSource.class, ds, ht);
+//		return ds;
+//	}
+//
+//	private synchronized XADataSource createXADataSource(String jndiDatasource)
+//			throws SQLException, InvalidSyntaxException {
+//		DataSourceFactory dsf = lookupDsf(DS_DRIVER_NAME);
+//		XADataSource ds = dsf.createXADataSource(dataSourceProperties);
+//		Hashtable<String, String> ht = new Hashtable<String, String>();
+//		ht.put(OSGI_JNDI_SERVICE_NAME, "XA" + jndiDatasource);
+//		ctx.registerService(XADataSource.class, ds, ht);
+//		return ds;
+//	}
+//
+//	private DataSourceFactory lookupDsf(String clientDriverName)
+//			throws InvalidSyntaxException {
+//		String filter = "(&(" + DataSourceFactory.OSGI_JDBC_DRIVER_CLASS + "="
+//				+ clientDriverName + "))";
+//		return getDsf(filter);
+//	}
+//
+//	private DataSourceFactory getDsf(String filter)
+//			throws InvalidSyntaxException {
+//		ServiceReference[] refs = null;
+//		refs = ctx.getServiceReferences(DataSourceFactory.class.getName(),
+//				filter);
+//		return (refs == null) ? null : (DataSourceFactory) ctx
+//				.getService(refs[0]);
+//	}
 }
