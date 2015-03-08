@@ -37,9 +37,9 @@
 		<module>org.lunifera.runtime.datasource.provider</module>
 		<module>org.lunifera.runtime.systemextension</module>
 		<module>org.lunifera.runtime.feature.common</module>
-<!-- 		<module>org.lunifera.runtime.feature.allinone</module> -->
+		<!-- <module>org.lunifera.runtime.feature.allinone</module> -->
 		<module>org.lunifera.runtime.feature.e4eventmanager</module>
-<!-- 		<module>org.lunifera.runtime.feature.allinone.testframework</module> -->
+		<!-- <module>org.lunifera.runtime.feature.allinone.testframework</module> -->
 		<module>org.lunifera.runtime.feature.configuration.manager</module>
 		<module>org.lunifera.runtime.feature.resolverhooks</module>
 		<module>org.lunifera.runtime.component.configuration.manager</module>
@@ -122,4 +122,18 @@
 			</build>
 		</profile>
 	</profiles>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.1</version>
+					<configuration>
+						<source>1.8</source>
+						<target>1.8</target>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
 </project>
