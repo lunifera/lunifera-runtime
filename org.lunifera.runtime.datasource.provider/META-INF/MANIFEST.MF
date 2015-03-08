@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Datasource
 Bundle-SymbolicName: org.lunifera.runtime.datasource.provider
 Bundle-Version: 0.9.1.qualifier
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Import-Package: javax.transaction;version="1.1.0",
  javax.transaction.xa;version="1.1.0",
@@ -16,8 +16,8 @@ Import-Package: javax.transaction;version="1.1.0",
  org.slf4j;version="1.7.2"
 Require-Bundle: org.eclipse.gemini.dbaccess.derby;bundle-version="1.1.0",
  org.apache.derby;bundle-version="10.8.2",
- org.eclipse.gemini.naming;bundle-version="1.0.4"
-Service-Component: OSGI-INF/org.lunifera.runtime.datasource.provider.impl.DataSourceService.xml,
- OSGI-INF/org.lunifera.runtime.datasource.provider.xml
-Export-Package: org.lunifera.runtime.datasource.provider,
- org.lunifera.runtime.datasource.provider.impl
+ org.eclipse.gemini.naming;bundle-version="1.0.4",
+ org.lunifera.runtime.common
+Service-Component: OSGI-INF/org.lunifera.runtime.datasource.provider.xml,
+ OSGI-INF/org.lunifera.runtime.datasource.provider.DatasourceService.xml
+Export-Package: org.lunifera.runtime.datasource.provider

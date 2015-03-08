@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" activate="activate" name="org.lunifera.runtime.datasource.provider.impl.DataSourceService">
-   <implementation class="org.lunifera.runtime.datasource.provider.impl.DataSourceService"/>
-   <service>
-      <provide interface="org.lunifera.runtime.datasource.provider.IDataSourceService"/>
-      <provide interface="org.osgi.util.tracker.ServiceTrackerCustomizer"/>
-   </service>
-</scr:component>

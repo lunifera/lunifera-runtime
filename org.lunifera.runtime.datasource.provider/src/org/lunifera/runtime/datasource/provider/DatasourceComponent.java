@@ -1,10 +1,7 @@
 package org.lunifera.runtime.datasource.provider;
 
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.List;
@@ -14,7 +11,7 @@ import java.util.stream.Collectors;
 import javax.sql.DataSource;
 import javax.sql.XADataSource;
 
-import org.lunifera.runtime.datasource.provider.IDataSourceService.DataSourceConfig.DsProperties;
+import org.lunifera.runtime.common.datasource.IDataSourceService;
 import org.osgi.framework.Filter;
 import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
@@ -116,17 +113,18 @@ public class DatasourceComponent implements
 	private List<String> filterProps(String driverName) {
 		switch (driverName) {
 		case "org.apache.derby.jdbc.ClientDriver": {
-			return Arrays.asList(DsProperties.values()).stream()
-					.filter(x -> x.name().contains("CLIENT_DERBY"))
+			return Arrays.asList(IDataSourceService.DsProperties.values())
+					.stream().filter(x -> x.name().contains("CLIENT_DERBY"))
 					.map(y -> y.toString()).collect(Collectors.toList());
 		}
 		case "org.apache.derby.jdbc.EmbeddedDriver": {
-			return Arrays.asList(DsProperties.values()).stream()
-					.filter(x -> x.name().contains("EMBEDDED_DERBY"))
+			return Arrays.asList(IDataSourceService.DsProperties.values())
+					.stream().filter(x -> x.name().contains("EMBEDDED_DERBY"))
 					.map(y -> y.toString()).collect(Collectors.toList());
 		}
-		default:{
-			return Arrays.asList(DsProperties.values().toString());
+		default: {
+			return Arrays.asList(IDataSourceService.DsProperties.values()
+					.toString());
 		}
 		}
 	}
@@ -169,6 +167,7 @@ public class DatasourceComponent implements
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void updated(Dictionary<String, ?> properties)
 			throws ConfigurationException {

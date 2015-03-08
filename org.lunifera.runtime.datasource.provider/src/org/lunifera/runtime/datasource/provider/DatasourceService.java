@@ -1,8 +1,7 @@
-package org.lunifera.runtime.datasource.provider.impl;
+package org.lunifera.runtime.datasource.provider;
 
 import java.io.IOException;
 import java.sql.DatabaseMetaData;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -12,7 +11,7 @@ import java.util.stream.Collectors;
 import javax.sql.DataSource;
 import javax.sql.XADataSource;
 
-import org.lunifera.runtime.datasource.provider.IDataSourceService;
+import org.lunifera.runtime.common.datasource.IDataSourceService;
 import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
 import org.osgi.service.cm.Configuration;
@@ -21,11 +20,9 @@ import org.osgi.service.component.ComponentContext;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.util.tracker.ServiceTracker;
-import org.osgi.util.tracker.ServiceTrackerCustomizer;
 
 @Component
-public class DataSourceService implements IDataSourceService,
-		ServiceTrackerCustomizer<ConfigurationAdmin, ConfigurationAdmin> {
+public class DatasourceService implements IDataSourceService {
 	private static final String ORG_LUNIFERA_EXAMPLES_DATASOURCE = "org.lunifera.runtime.datasource.provider";
 	private ServiceTracker<ConfigurationAdmin, ConfigurationAdmin> cfgAdminTracker;
 	private ConfigurationAdmin configAdmin;
@@ -120,26 +117,5 @@ public class DataSourceService implements IDataSourceService,
 		} catch (InvalidSyntaxException e) {
 			e.printStackTrace();
 		}
-	}
-
-	@Override
-	public ConfigurationAdmin addingService(
-			ServiceReference<ConfigurationAdmin> reference) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void modifiedService(ServiceReference<ConfigurationAdmin> reference,
-			ConfigurationAdmin service) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void removedService(ServiceReference<ConfigurationAdmin> reference,
-			ConfigurationAdmin service) {
-		// TODO Auto-generated method stub
-
 	}
 }
