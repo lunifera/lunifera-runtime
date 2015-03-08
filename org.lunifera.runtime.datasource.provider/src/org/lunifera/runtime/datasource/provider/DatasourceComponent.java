@@ -82,6 +82,17 @@ public class DatasourceComponent implements
 	private void createNewDatasources(Properties properties) {
 		try {
 			ds = dataSourceFactory.createDataSource(properties);
+
+			// Hashtable<String, Object> props = new Hashtable<String,
+			// Object>();
+			// props.put(JNDIConstants.JNDI_SERVICENAME, "");
+			// TODO - please put props to registry
+			// 1) datasourceName from DatasourceFactory#OSGI_JDBC_DRIVER_CLASS,
+			// #OSGI_JDBC_DRIVER_NAME, #OSGI_JDBC_DRIVER_VERSION,
+			// #JDBC_DATABASE_NAME, #JDBC_DATASOURCE_NAME
+			//
+			// And please register the #JDBC_DATASOURCE_NAME with
+			// JNDIConstants.JNDI_SERVICENAME too.
 			dsRegister = context.getBundleContext().registerService(
 					DataSource.class, ds, null);
 			xaDs = dataSourceFactory.createXADataSource(properties);
@@ -103,6 +114,7 @@ public class DatasourceComponent implements
 		Enumeration<String> iter = input.keys();
 		while (iter.hasMoreElements()) {
 			String key = (String) iter.nextElement();
+			// TODO Berny - n x m -> Performance
 			if (filterProps(driverName).contains(key)) {
 				props.setProperty(key, input.get(key).toString());
 			}
@@ -134,8 +146,11 @@ public class DatasourceComponent implements
 		this.context = null;
 
 		killCurrent();
-		dsFactoryTracker.close();
-		dsFactoryTracker = null;
+
+		if (dsFactoryTracker != null) {
+			dsFactoryTracker.close();
+			dsFactoryTracker = null;
+		}
 
 	}
 

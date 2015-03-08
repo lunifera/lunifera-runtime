@@ -3,7 +3,6 @@ package org.lunifera.runtime.datasource.provider;
 import java.io.IOException;
 import java.sql.DatabaseMetaData;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,7 +13,6 @@ import javax.sql.XADataSource;
 import org.lunifera.runtime.common.datasource.IDataSourceService;
 import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
-import org.osgi.service.cm.Configuration;
 import org.osgi.service.cm.ConfigurationAdmin;
 import org.osgi.service.component.ComponentContext;
 import org.osgi.service.component.annotations.Activate;
@@ -97,25 +95,25 @@ public class DatasourceService implements IDataSourceService {
 	@Override
 	public void createDataSource(DataSourceConfig config) {
 		try {
-			try {
-				if (configAdmin.listConfigurations(null) != null) {
-					List<Configuration> configurations = Arrays
-							.asList(configAdmin.listConfigurations(null));
-					for (Configuration c : configurations) {
-						c.delete();
-					}
-				}
-			} catch (NullPointerException e) {
-				e.printStackTrace();
-			}
+			// try {
+			// if (configAdmin.listConfigurations(null) != null) {
+			// List<Configuration> configurations = Arrays
+			// .asList(configAdmin.listConfigurations(null));
+			// for (Configuration c : configurations) {
+			// c.delete();
+			// }
+			// }
+			// } catch (NullPointerException e) {
+			// e.printStackTrace();
+			// }
 			String pid = configAdmin.createFactoryConfiguration(
 					ORG_LUNIFERA_EXAMPLES_DATASOURCE, null).getPid();
 			configAdmin.getConfiguration(pid, null).update(
 					config.getProperties());
 		} catch (IOException e) {
 			e.printStackTrace();
-		} catch (InvalidSyntaxException e) {
-			e.printStackTrace();
+			// } catch (InvalidSyntaxException e) {
+			// e.printStackTrace();
 		}
 	}
 }
