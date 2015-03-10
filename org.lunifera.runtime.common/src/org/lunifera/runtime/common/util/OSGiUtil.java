@@ -49,7 +49,7 @@ public class OSGiUtil {
 		return props;
 	}
 
-	public static String[] getEnumValues(Class<? extends Enum<?>> e) {
+	public static String[] getEnumValues(Class<? extends Enum<?>> e) {	
 		return Arrays.toString(e.getEnumConstants()).replaceAll("^.|.$", "")
 				.split(", ");
 	}
