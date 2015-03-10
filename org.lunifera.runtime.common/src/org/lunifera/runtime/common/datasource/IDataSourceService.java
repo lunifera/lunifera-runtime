@@ -1,11 +1,11 @@
 package org.lunifera.runtime.common.datasource;
 
-import java.util.Dictionary;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
 
 import javax.sql.DataSource;
+
+import org.lunifera.runtime.common.datasource.config.CommonDatasourceConfig;
 
 public interface IDataSourceService {
 
@@ -13,7 +13,9 @@ public interface IDataSourceService {
 
 	List<DataSource> getDataSources(String filter);
 
-	void createDataSource(DataSourceConfig config);
+//	void createDataSource(DataSourceConfig config);
+	
+	void createDataSource(CommonDatasourceConfig config);
 
 	public static class DataSourceInfo {
 		private HashMap<String, String> properties;
@@ -59,26 +61,26 @@ public interface IDataSourceService {
 
 	}
 
-	public static class DataSourceConfig {
-
-		private Dictionary<String, Object> props;
-
-		public DataSourceConfig() {
-			props = new Hashtable<String, Object>();
-		}
-
-		public void addProperty(String key, String value) {
-			props.put(key.toString(), value);
-		}
-
-		// public void addProperty(DsProperties key, String value) {
-		// props.put(key.toString(), value);
-		// }
-
-		public Dictionary<String, Object> getProperties() {
-			return props;
-		}
-	}
+//	public static class DataSourceConfig {
+//
+//		private Dictionary<String, Object> props;
+//
+//		public DataSourceConfig() {
+//			props = new Hashtable<String, Object>();
+//		}
+//
+//		public void addProperty(String key, String value) {
+//			props.put(key.toString(), value);
+//		}
+//
+//		// public void addProperty(DsProperties key, String value) {
+//		// props.put(key.toString(), value);
+//		// }
+//
+//		public Dictionary<String, Object> getProperties() {
+//			return props;
+//		}
+//	}
 
 	public enum DsProperties {
 		EMBEDDED_DERBY_ATTRIBUTES_AS_PASSWORD {

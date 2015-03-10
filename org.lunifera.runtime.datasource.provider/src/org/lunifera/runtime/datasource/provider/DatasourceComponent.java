@@ -1,17 +1,14 @@
 package org.lunifera.runtime.datasource.provider;
 
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.Dictionary;
-import java.util.Enumeration;
-import java.util.List;
 import java.util.Properties;
-import java.util.stream.Collectors;
 
 import javax.sql.DataSource;
 import javax.sql.XADataSource;
 
-import org.lunifera.runtime.common.datasource.IDataSourceService;
+import org.lunifera.runtime.common.datasource.config.CommonDatasourceConfig;
+import org.lunifera.runtime.common.util.OSGiUtil;
 import org.osgi.framework.Filter;
 import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
@@ -61,7 +58,7 @@ public class DatasourceComponent implements
 	protected void update(ComponentContext context) {
 		killCurrent();
 		if (dataSourceFactory != null) {
-			createNewDatasources(convertMapToProperties(context.getProperties()));
+			createNewDatasource(context.getProperties());
 		}
 	}
 
@@ -79,9 +76,19 @@ public class DatasourceComponent implements
 		}
 	}
 
-	private void createNewDatasources(Properties properties) {
+	private void createNewDatasource(Dictionary<?, ?> input) {
 		try {
+			String driverName = (String) input
+					.get(DataSourceFactory.OSGI_JDBC_DRIVER_NAME);
+
+			Properties properties = OSGiUtil
+					.filterProperties(OSGiUtil
+							.convertDictionaryToProperties(input),
+							CommonDatasourceConfig
+									.getPropertyKeysForDriver(driverName));
+
 			ds = dataSourceFactory.createDataSource(properties);
+			xaDs = dataSourceFactory.createXADataSource(properties);
 
 			// Hashtable<String, Object> props = new Hashtable<String,
 			// Object>();
@@ -95,7 +102,6 @@ public class DatasourceComponent implements
 			// JNDIConstants.JNDI_SERVICENAME too.
 			dsRegister = context.getBundleContext().registerService(
 					DataSource.class, ds, null);
-			xaDs = dataSourceFactory.createXADataSource(properties);
 			xaDsRegister = context.getBundleContext().registerService(
 					XADataSource.class, xaDs, null);
 		} catch (SQLException e) {
@@ -104,40 +110,6 @@ public class DatasourceComponent implements
 			e.printStackTrace();
 		} catch (NullPointerException e) {
 			e.printStackTrace();
-		}
-	}
-
-	private Properties convertMapToProperties(Dictionary<String, Object> input) {
-		String driverName = (String) input
-				.get(DataSourceFactory.OSGI_JDBC_DRIVER_NAME);
-		Properties props = new Properties();
-		Enumeration<String> iter = input.keys();
-		while (iter.hasMoreElements()) {
-			String key = (String) iter.nextElement();
-			// TODO Berny - n x m -> Performance
-			if (filterProps(driverName).contains(key)) {
-				props.setProperty(key, input.get(key).toString());
-			}
-		}
-		return props;
-	}
-
-	private List<String> filterProps(String driverName) {
-		switch (driverName) {
-		case "org.apache.derby.jdbc.ClientDriver": {
-			return Arrays.asList(IDataSourceService.DsProperties.values())
-					.stream().filter(x -> x.name().contains("CLIENT_DERBY"))
-					.map(y -> y.toString()).collect(Collectors.toList());
-		}
-		case "org.apache.derby.jdbc.EmbeddedDriver": {
-			return Arrays.asList(IDataSourceService.DsProperties.values())
-					.stream().filter(x -> x.name().contains("EMBEDDED_DERBY"))
-					.map(y -> y.toString()).collect(Collectors.toList());
-		}
-		default: {
-			return Arrays.asList(IDataSourceService.DsProperties.values()
-					.toString());
-		}
 		}
 	}
 
@@ -160,7 +132,7 @@ public class DatasourceComponent implements
 		if (dataSourceFactory == null) {
 			dataSourceFactory = context.getBundleContext()
 					.getService(reference);
-			createNewDatasources(convertMapToProperties(context.getProperties()));
+			createNewDatasource(context.getProperties());
 			return dataSourceFactory;
 		} else {
 			return null;
@@ -182,7 +154,6 @@ public class DatasourceComponent implements
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void updated(Dictionary<String, ?> properties)
 			throws ConfigurationException {
@@ -198,7 +169,7 @@ public class DatasourceComponent implements
 		}
 		if (properties != null) {
 			killCurrent();
-			createNewDatasources(convertMapToProperties((Dictionary<String, Object>) properties));
+			createNewDatasource(properties);
 		}
 	}
 

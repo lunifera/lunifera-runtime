@@ -11,6 +11,8 @@ import javax.sql.DataSource;
 import javax.sql.XADataSource;
 
 import org.lunifera.runtime.common.datasource.IDataSourceService;
+import org.lunifera.runtime.common.datasource.config.CommonDatasourceConfig;
+import org.lunifera.runtime.common.util.OSGiUtil;
 import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
 import org.osgi.service.cm.ConfigurationAdmin;
@@ -19,6 +21,7 @@ import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.util.tracker.ServiceTracker;
 
+@SuppressWarnings("unused")
 @Component
 public class DatasourceService implements IDataSourceService {
 	private static final String ORG_LUNIFERA_EXAMPLES_DATASOURCE = "org.lunifera.runtime.datasource.provider";
@@ -92,28 +95,41 @@ public class DatasourceService implements IDataSourceService {
 		return dataSourcelist;
 	}
 
+	// @Override
+	// public void createDataSource(DataSourceConfig config) {
+	// try {
+	// // try {
+	// // if (configAdmin.listConfigurations(null) != null) {
+	// // List<Configuration> configurations = Arrays
+	// // .asList(configAdmin.listConfigurations(null));
+	// // for (Configuration c : configurations) {
+	// // c.delete();
+	// // }
+	// // }
+	// // } catch (NullPointerException e) {
+	// // e.printStackTrace();
+	// // }
+	// String pid = configAdmin.createFactoryConfiguration(
+	// ORG_LUNIFERA_EXAMPLES_DATASOURCE, null).getPid();
+	// configAdmin.getConfiguration(pid, null).update(
+	// config.getProperties());
+	// } catch (IOException e) {
+	// e.printStackTrace();
+	// // } catch (InvalidSyntaxException e) {
+	// // e.printStackTrace();
+	// }
+	// }
+
 	@Override
-	public void createDataSource(DataSourceConfig config) {
+	public void createDataSource(CommonDatasourceConfig config) {
 		try {
-			// try {
-			// if (configAdmin.listConfigurations(null) != null) {
-			// List<Configuration> configurations = Arrays
-			// .asList(configAdmin.listConfigurations(null));
-			// for (Configuration c : configurations) {
-			// c.delete();
-			// }
-			// }
-			// } catch (NullPointerException e) {
-			// e.printStackTrace();
-			// }
 			String pid = configAdmin.createFactoryConfiguration(
 					ORG_LUNIFERA_EXAMPLES_DATASOURCE, null).getPid();
-			configAdmin.getConfiguration(pid, null).update(
-					config.getProperties());
+			configAdmin.getConfiguration(pid, null)
+					.update(OSGiUtil.convertHashMapToDictionary(config
+							.getProperties()));
 		} catch (IOException e) {
 			e.printStackTrace();
-			// } catch (InvalidSyntaxException e) {
-			// e.printStackTrace();
 		}
 	}
 }

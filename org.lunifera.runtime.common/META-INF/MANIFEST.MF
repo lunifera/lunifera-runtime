@@ -9,13 +9,15 @@ Bundle-ActivationPolicy: lazy
 Export-Package: org.lunifera.runtime.common.annotations;version="0.8.1",
  org.lunifera.runtime.common.coordination,
  org.lunifera.runtime.common.datasource,
+ org.lunifera.runtime.common.datasource.config,
  org.lunifera.runtime.common.dispose;version="0.8.1",
  org.lunifera.runtime.common.event;version="0.8.1",
  org.lunifera.runtime.common.hash,
  org.lunifera.runtime.common.metric;version="0.8.1",
  org.lunifera.runtime.common.state,
  org.lunifera.runtime.common.state.impl;x-internal:=true,
- org.lunifera.runtime.common.user;version="0.8.1"
+ org.lunifera.runtime.common.user;version="0.8.1",
+ org.lunifera.runtime.common.util
 Import-Package: org.osgi.framework;version="1.8.0",
  org.osgi.service.component;version="1.2.2",
  org.osgi.service.component.annotations;version="1.2.0",
