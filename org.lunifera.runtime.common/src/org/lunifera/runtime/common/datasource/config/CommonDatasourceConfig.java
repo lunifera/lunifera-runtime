@@ -10,11 +10,11 @@ public abstract class CommonDatasourceConfig {
 	private static String EMPTY_STRING = "";
 	protected static String OSGI_DRIVER_NAME = "osgi.jdbc.driver.name";
 
-	public CommonDatasourceConfig() {
-		this.properties = new HashMap<String, String>();
-	}
-
 	protected HashMap<String, String> properties;
+
+	public CommonDatasourceConfig() {
+		properties = new HashMap<String, String>();
+	}
 
 	public HashMap<String, String> getProperties() {
 		return properties;
@@ -57,5 +57,4 @@ public abstract class CommonDatasourceConfig {
 			return null;
 		}
 	}
-
 }
