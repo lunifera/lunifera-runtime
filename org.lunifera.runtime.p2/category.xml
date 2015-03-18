@@ -30,6 +30,12 @@
    <feature id="org.lunifera.runtime.feature.jsr303.validation.source">
       <category name="lunifera-runtime-components"/>
    </feature>
+      <feature id="org.lunifera.runtime.feature.datasource.provider">
+      <category name="lunifera-runtime-components"/>
+   </feature>
+   <feature id="org.lunifera.runtime.feature.datasource.provider.source">
+      <category name="lunifera-runtime-components"/>
+   </feature>
    
    <category-def name="lunifera-runtime-components" label="Lunifera Runtime Components"/>
 </site>
