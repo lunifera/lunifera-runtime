@@ -53,6 +53,9 @@ public abstract class CommonDatasourceConfig {
 		} else if (ClientDerbyDatasourceConfig.DRIVER_NAME.equals(driverName)) {
 			return OSGiUtil
 					.getEnumValues(ClientDerbyDatasourceConfig.Keys.class);
+		} else if (MySQLDatasourceConfig.DRIVER_NAME.equals(driverName)) {
+			return OSGiUtil
+					.getEnumValues(MySQLDatasourceConfig.Keys.class);
 		} else {
 			return null;
 		}

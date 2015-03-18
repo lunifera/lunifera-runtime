@@ -1,5 +1,10 @@
 package org.lunifera.runtime.common.datasource.config;
 
+import java.util.HashMap;
+
+import org.lunifera.runtime.common.datasource.config.ClientDerbyDatasourceConfig.Keys;
+import org.lunifera.runtime.common.util.OSGiUtil;
+
 public class MySQLDatasourceConfig extends CommonDatasourceConfig {
 
 	public MySQLDatasourceConfig() {
@@ -2810,4 +2815,7 @@ public class MySQLDatasourceConfig extends CommonDatasourceConfig {
 		return getValue(Keys.ZERO_DATE_TIME_BEHAVIOR.toString());
 	};
 
+	public HashMap<String, String> filterProperties() {
+		return filterProperties(OSGiUtil.getEnumValues(Keys.class));
+	}
 }
