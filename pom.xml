@@ -34,6 +34,7 @@
 		<module>org.lunifera.runtime.parent</module>
 		<module>org.lunifera.runtime.common</module>
 		<module>org.lunifera.runtime.event</module>
+		<module>org.lunifera.runtime.jsr303.validation</module>
 		<module>org.lunifera.runtime.datasource.provider</module>
 		<module>org.lunifera.runtime.systemextension</module>
 		<module>org.lunifera.runtime.feature.common</module>
