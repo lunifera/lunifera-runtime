@@ -5,8 +5,8 @@ Bundle-Vendor: Lunifera GmbH
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-SymbolicName: org.lunifera.runtime.jsr303.validation
 Bundle-Version: 0.9.1.qualifier
-Import-Package: javax.validation;version="1.0.0.GA",
- javax.validation.bootstrap;version="1.0.0.GA",
+Import-Package: javax.validation;version="1.0.0",
+ javax.validation.bootstrap;version="1.0.0",
  org.osgi.framework;version="1.8.0",
  org.slf4j;version="1.7.2"
 Bundle-ActivationPolicy: lazy
