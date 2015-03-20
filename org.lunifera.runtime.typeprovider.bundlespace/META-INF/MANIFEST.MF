@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.lunifera.runtime.typeprovider.bundlespace
+Bundle-Vendor: Lunifera GmbH
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-SymbolicName: org.lunifera.runtime.typeprovider.bundlespace
+Bundle-Version: 0.9.1.qualifier
+Import-Package: javax.validation;version="1.0.0",
+ javax.validation.bootstrap;version="1.0.0",
+ org.osgi.framework;version="1.8.0",
+ org.osgi.service.component.annotations;version="1.2.0",
+ org.slf4j;version="1.7.2"
+Service-Component: OSGI-INF/org.lunifera.runtime.jsr303.validation.EventBroker.xml,
+ OSGI-INF/org.lunifera.runtime.typeprovider.bundlespace.BundleSpaceTypeProviderService.xml
+Require-Bundle: org.apache.bval;bundle-version="0.3.0",
+ org.lunifera.runtime.common

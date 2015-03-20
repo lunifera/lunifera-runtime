@@ -16,6 +16,7 @@ Export-Package: org.lunifera.runtime.common.annotations,
  org.lunifera.runtime.common.metric;version="0.8.1",
  org.lunifera.runtime.common.state,
  org.lunifera.runtime.common.state.impl;x-internal:=true,
+ org.lunifera.runtime.common.types,
  org.lunifera.runtime.common.user;version="0.8.1",
  org.lunifera.runtime.common.util
 Import-Package: org.osgi.framework;version="1.8.0",
