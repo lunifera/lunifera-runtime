@@ -37,6 +37,7 @@
 		<module>org.lunifera.runtime.jsr303.validation</module>
 		<module>org.lunifera.runtime.datasource.provider</module>
 		<module>org.lunifera.runtime.typeprovider.bundlespace</module>
+		<module>org.lunifera.runtime.ecore.bundlespace</module>
 		<module>org.lunifera.runtime.systemextension</module>
 		<module>org.lunifera.runtime.feature.common</module>
 		<!-- <module>org.lunifera.runtime.feature.allinone</module> -->
@@ -44,6 +45,7 @@
 		<module>org.lunifera.runtime.feature.jsr303.validation</module>
 		<module>org.lunifera.runtime.feature.datasource.provider</module>
 		<module>org.lunifera.runtime.feature.typeprovider.bundlespace</module>
+		<module>org.lunifera.runtime.feature.ecore.bundlespace</module>
 		<!-- <module>org.lunifera.runtime.feature.allinone.testframework</module> -->
 		<module>org.lunifera.runtime.feature.configuration.manager</module>
 		<module>org.lunifera.runtime.feature.resolverhooks</module>
