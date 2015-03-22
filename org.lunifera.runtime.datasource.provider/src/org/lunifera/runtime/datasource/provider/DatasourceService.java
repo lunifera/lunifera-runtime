@@ -62,11 +62,9 @@ public class DatasourceService implements IDataSourceService {
 				.map(serviceRef -> context.getBundleContext().getService(
 						serviceRef)).collect(Collectors.toList()).stream()
 				.forEach(dataSource -> {
-					DatabaseMetaData c;
 					try {
-						c = dataSource.getConnection().getMetaData();
 						DataSourceInfo dI = new DataSourceInfo();
-						dI.getProperties().put("Url", c.getURL().toString());
+//						dI.getProperties().put("Url", c.getURL().toString());
 						dsInfos.add(dI);
 					} catch (Exception e) {
 						e.printStackTrace();

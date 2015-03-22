@@ -26,7 +26,7 @@ public class BundleSpaceTypeProviderService implements ITypeProviderService {
 		try {
 			return bundleSpace.forName(qualifiedName);
 		} catch (ClassNotFoundException e) {
-			LOGGER.error("{}", e);
+			LOGGER.warn("{}", e.getMessage());
 		}
 
 		return null;
