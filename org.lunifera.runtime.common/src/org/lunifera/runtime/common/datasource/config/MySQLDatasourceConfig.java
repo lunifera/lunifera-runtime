@@ -2,7 +2,6 @@ package org.lunifera.runtime.common.datasource.config;
 
 import java.util.HashMap;
 
-import org.lunifera.runtime.common.datasource.config.ClientDerbyDatasourceConfig.Keys;
 import org.lunifera.runtime.common.util.OSGiUtil;
 
 public class MySQLDatasourceConfig extends CommonDatasourceConfig {
