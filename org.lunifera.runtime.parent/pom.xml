@@ -34,7 +34,6 @@
 						<target>1.8</target>
 					</configuration>
 				</plugin>
-<!-- 	Quickfix until we move to 1.8 in releng -->
 				<plugin>
 					<groupId>org.eclipse.tycho</groupId>
 					<artifactId>tycho-compiler-plugin</artifactId>
@@ -46,7 +45,6 @@
 						<target>1.8</target>
 					</configuration>
 				</plugin>
-<!-- 		End Quickfix -->
 				<plugin>
 					<groupId>org.eclipse.tycho</groupId>
 					<artifactId>target-platform-configuration</artifactId>
