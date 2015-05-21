@@ -37,6 +37,9 @@
 				</executions>
 				<configuration>
 					<labelSuffix> (source)</labelSuffix>
+					<excludes>
+						<plugin id="org.eclipse.persistence.core" />
+					</excludes>
 				</configuration>
 			</plugin>
 			<plugin>
