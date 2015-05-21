@@ -13,6 +13,7 @@ Export-Package: org.lunifera.runtime.common.annotations,
  org.lunifera.runtime.common.dispose;version="0.8.1",
  org.lunifera.runtime.common.event;version="0.8.1",
  org.lunifera.runtime.common.hash,
+ org.lunifera.runtime.common.i18n,
  org.lunifera.runtime.common.keystroke,
  org.lunifera.runtime.common.metric;version="0.8.1",
  org.lunifera.runtime.common.state,
@@ -28,8 +29,10 @@ Import-Package: org.osgi.framework;version="1.8.0",
  org.osgi.service.prefs,
  org.osgi.util.tracker;version="1.5.1",
  org.slf4j;version="1.7.2"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Service-Component: OSGI-INF/org.lunifera.runtime.common.environment.impl.SharedEnvironmentProvider.xml,
  OSGI-INF/org.lunifera.runtime.common.state.impl.SharedStateContextProvider.xml
 Require-Bundle: com.google.guava,
- org.apache.commons.lang;bundle-version="2.6.0"
+ org.apache.commons.lang;bundle-version="2.6.0",
+ org.apache.commons.collections;bundle-version="3.2.0",
+ org.eclipse.core.runtime;bundle-version="3.10.0"
