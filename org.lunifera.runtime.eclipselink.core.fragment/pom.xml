@@ -20,4 +20,5 @@
 
 	<artifactId>org.lunifera.runtime.eclipselink.core.fragment</artifactId>
 	<packaging>eclipse-plugin</packaging>
+	
 </project>

@@ -48,6 +48,12 @@
    <feature id="org.lunifera.runtime.feature.typeprovider.bundlespace.source">
       <category name="lunifera-runtime-components"/>
    </feature>
+   <feature id="org.lunifera.runtime.feature.eclipselink.core.fragment">
+      <category name="lunifera-runtime-components"/>
+   </feature>
+   <feature id="org.lunifera.runtime.feature.eclipselink.core.fragment.source">
+      <category name="lunifera-runtime-components"/>
+   </feature>
    
    <category-def name="lunifera-runtime-components" label="Lunifera Runtime Components"/>
 </site>
