@@ -57,6 +57,7 @@
 		<module>org.lunifera.runtime.eclipselink.core.fragment</module>
 		<module>org.lunifera.runtime.usernotification</module>
 		<module>org.lunifera.runtime.p2</module>
+		<module>org.lunifera.runtime.security</module>
 	</modules>
 
 	<profiles>
