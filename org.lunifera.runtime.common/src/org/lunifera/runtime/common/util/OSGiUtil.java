@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2011 - 2015, Bernhard Edler (Wien)
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *         Bernhard Edler - Initial implementation
+ */
 package org.lunifera.runtime.common.util;
 
 import java.util.Arrays;
