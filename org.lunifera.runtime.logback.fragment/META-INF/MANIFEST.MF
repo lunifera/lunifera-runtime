@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Fragment for Logback
+Bundle-SymbolicName: org.lunifera.runtime.logback.fragment
+Bundle-Version: 0.9.1.qualifier
+Fragment-Host: ch.qos.logback.classic;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
