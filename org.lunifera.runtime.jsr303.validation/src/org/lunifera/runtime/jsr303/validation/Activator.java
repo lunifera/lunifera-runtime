@@ -10,15 +10,20 @@
  */
 package org.lunifera.runtime.jsr303.validation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Validation;
+import javax.validation.ValidationProviderResolver;
 import javax.validation.ValidatorFactory;
+import javax.validation.spi.ValidationProvider;
 
 import org.apache.bval.jsr303.ApacheValidationProvider;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 
-public class Activator implements BundleActivator {
+public class Activator implements BundleActivator, ValidationProviderResolver {
 
 	private ServiceRegistration<ValidatorFactory> registry;
 
@@ -26,8 +31,8 @@ public class Activator implements BundleActivator {
 	public void start(BundleContext context) throws Exception {
 		// provide the bean validation factory
 		ValidatorFactory avf = Validation
-				.byProvider(ApacheValidationProvider.class).configure()
-				.buildValidatorFactory();
+				.byProvider(ApacheValidationProvider.class)
+				.providerResolver(this).configure().buildValidatorFactory();
 
 		registry = context.registerService(ValidatorFactory.class, avf, null);
 	}
@@ -40,4 +45,10 @@ public class Activator implements BundleActivator {
 		}
 	}
 
+	@Override
+	public List<ValidationProvider<?>> getValidationProviders() {
+		List<ValidationProvider<?>> result = new ArrayList<ValidationProvider<?>>();
+		result.add(new ApacheValidationProvider());
+		return result;
+	}
 }
