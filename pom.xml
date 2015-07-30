@@ -31,6 +31,7 @@
 		<module>org.lunifera.runtime.event</module>
 		<module>org.lunifera.runtime.datasource.provider</module>
 		<module>org.lunifera.runtime.jsr303.validation</module>
+		<module>org.lunifera.runtime.logback.fragment</module>
 		<module>org.lunifera.runtime.systemextension</module>
 		<module>org.lunifera.runtime.typeprovider.bundlespace</module>
 		<module>org.lunifera.runtime.usernotification</module>
