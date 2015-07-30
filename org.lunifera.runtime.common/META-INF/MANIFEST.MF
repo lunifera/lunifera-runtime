@@ -21,7 +21,8 @@ Export-Package: org.lunifera.runtime.common.annotations,
  org.lunifera.runtime.common.state.impl;x-internal:=true,
  org.lunifera.runtime.common.types,
  org.lunifera.runtime.common.user;version="0.8.1",
- org.lunifera.runtime.common.util
+ org.lunifera.runtime.common.util,
+ org.lunifera.runtime.common.validation
 Import-Package: org.osgi.framework;version="1.8.0",
  org.osgi.service.component;version="1.2.2",
  org.osgi.service.component.annotations;version="1.2.0",

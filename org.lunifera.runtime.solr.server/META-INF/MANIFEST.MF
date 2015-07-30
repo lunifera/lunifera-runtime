@@ -11,8 +11,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.apache.stanbol.commons.stanboltools.datafileprovider;bundle-version="0.11.0",
  org.apache.felix.http.jetty;bundle-version="2.2.1",
  org.eclipse.equinox.util;bundle-version="1.0.500",
- org.eclipse.equinox.ds;bundle-version="1.4.101",
- org.eclipse.osgi.services;bundle-version="3.3.100"
+ org.eclipse.equinox.ds;bundle-version="1.4.101"
 Export-Package: org.lunifera.runtime.solr.server
 Import-Package: org.apache.commons.compress.utils;version="1.4.1",
  org.apache.commons.io,
