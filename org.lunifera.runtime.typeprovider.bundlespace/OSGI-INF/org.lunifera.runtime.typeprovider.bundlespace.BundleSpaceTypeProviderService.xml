@@ -4,5 +4,5 @@
    <service>
       <provide interface="org.lunifera.runtime.common.types.ITypeProviderService"/>
    </service>
-   <reference bind="bindBundleSpace" cardinality="1..1" interface="org.lunifera.runtime.common.types.IBundleSpace" name="BundleSpace" policy="static"/>
+   <reference bind="bindBundleSpace" cardinality="1..1" interface="org.lunifera.runtime.common.types.IBundleSpace" name="BundleSpace" policy="static" unbind="unbindBundleSpace"/>
 </scr:component>

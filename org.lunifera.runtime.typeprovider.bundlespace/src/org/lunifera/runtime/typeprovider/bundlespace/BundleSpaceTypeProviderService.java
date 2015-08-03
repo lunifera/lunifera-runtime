@@ -31,6 +31,10 @@ public class BundleSpaceTypeProviderService implements ITypeProviderService {
 		this.bundleSpace = bundleSpace;
 	}
 
+	protected void unbindBundleSpace(IBundleSpace bundleSpace) {
+		this.bundleSpace = null;
+	}
+	
 	@Override
 	public Class<?> forName(Object clazz, String qualifiedName) {
 		try {
